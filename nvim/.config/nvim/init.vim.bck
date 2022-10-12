@@ -1,0 +1,441 @@
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'davidhalter/jedi-vim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'zchee/deoplete-jedi'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sbdchd/neoformat'
+Plug 'scrooloose/nerdtree'
+Plug 'neomake/neomake'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tmhedberg/SimpylFold'
+Plug 'sheerun/vim-polyglot'
+Plug 'kien/ctrlp.vim'
+Plug 'jmcomets/vim-pony'
+Plug 'TimUntersberger/neogit'
+Plug 'sindrets/diffview.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'akinsho/toggleterm.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Plug 'tweekmonster/django-plus.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'voldikss/vim-floaterm'
+Plug 'airblade/vim-gitgutter'
+
+" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+
+" ColorSchemes
+Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
+Plug 'tiagovla/tokyodark.nvim'
+" Plug 'arcticicestudio/nord-vim'
+
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'tpope/vim-fugitive'
+
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+" Plug 'tweekmonster/impsort.vim'
+
+" VimWiki
+Plug 'vimwiki/vimwiki'
+
+call plug#end()
+
+set hidden
+set number
+set relativenumber
+set termguicolors
+set nocompatible
+filetype plugin on
+syntax on
+
+" spell languages
+set spelllang=en,cjk
+" Show nine spell checking candidates at most
+set spellsuggest=best,9
+" set spell
+autocmd BufRead,BufNewFile *.py,*.js,*.html,*.md setlocal spell
+
+let g:python_highlight_all = 1
+let g:python3_host_prog = '/Users/ashishnayan/.pyenv/shims/python' 
+" Trim trailing whitespaces for python files
+" autocmd BufWritePre *.py :%s/\s\+$//e
+
+" split navigations
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+inoremap <C-h> <C-\><C-N><C-w>h
+inoremap <C-j> <C-\><C-N><C-w>j
+inoremap <C-k> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+map <C-n> :bn<cr>
+map <C-b> :bp<cr>
+nnoremap <silent> <F11> :set spell!<cr>
+inoremap <silent> <F11> <C-O>:set spell!<cr>
+
+tnoremap <Esc><Esc> <C-\><C-n>
+
+let g:Hexokinase_highlighters = ['backgroundfull']
+
+" autocmd ColorScheme * highlight Comment gui=italic cterm=italic 
+autocmd ColorScheme * highlight NeomakeVirtualtextWarning gui=italic cterm=italic guifg=#ff7f50
+autocmd ColorScheme * highlight NeomakeWarningSign guifg=#ff7f50
+" autocmd ColorScheme * highlight Visual ctermbg=111 guibg=#222222
+
+autocmd ColorScheme * highlight pythonImport gui=italic cterm=italic guifg=#D08770
+" autocmd ColorScheme * highlight pythonInclude guifg=#A3BE8C
+
+" Autocomplete configurations
+" let g:deoplete#enable_at_startup = 1
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" set splitbelow
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" Airline Theme
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline_theme="night_owl"   " <theme> is a valid theme name
+
+let g:airline_extensions = ['branch', 'tabline', 'virtualenv']
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled=1
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to space conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" disable autocompletion, because we use deoplete for completion
+" let g:jedi#completions_enabled = 1
+
+" open the go-to function in split, not another buffer
+" let g:jedi#use_splits_not_buffers = "right"
+
+" --max-line-length=131, --ignore=W503,W391'
+let g:neomake_python_enabled_makers = ['flake8']
+call neomake#configure#automake('nrwi', 500)
+
+" Auto format python files
+autocmd BufWritePre *.py :Neoformat
+
+hi HighlightedyankRegion cterm=reverse gui=reverse
+
+" set highlight duration time to 1000 ms, i.e., 1 second
+let g:highlightedyank_highlight_duration = 1000
+
+syntax on
+" colorscheme onedark
+"...
+set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+" colorscheme gruvbox
+
+" TokyoDark ColorScheme
+let g:tokyodark_transparent_background = 1
+let g:tokyodark_enable_italic_comment = 1
+let g:tokyodark_enable_italic = 1
+let g:tokyodark_color_gamma = "1.0"
+colorscheme tokyodark
+
+set background=dark "use dark mode
+" set background=light " uncomment to use light mode
+
+highlight Visual  guifg=White guibg=LightBlue
+set foldlevelstart=99
+
+let g:SimpylFold_fold_docstring = 0
+let g:SimpylFold_fold_import = 0
+
+" Neogit Setup 
+lua << EOF
+local neogit = require('neogit')
+neogit.setup {
+	integrations = {
+		diffview = true
+		}
+	}
+EOF
+
+nnoremap <leader>gg :Neogit<cr>
+nnoremap <leader>gd :DiffviewOpen<cr>
+nnoremap <leader>gD :DiffviewOpen master<cr>
+nnoremap <leader>gl :Neogit log<cr>
+
+" Toggle vim Config
+" lua << EOF
+" require("toggleterm").setup{}
+" EOF
+
+" nnoremap <silent> <C-i> :ToggleTerm size=20 direction=horizontal <Enter>
+" tnoremap <silent> <C-i> <C-\><C-n>:ToggleTerm size=20 direction=horizontal <Enter>
+
+" lua << EOF
+" function _G.set_terminal_keymaps()
+"   local opts = {noremap = true}
+"   vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+"   vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+"   vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+"   vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+"   vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+"   vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+" end
+" vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+" EOF
+
+"NERDTree Toggle
+nnoremap nt :NERDTreeToggle<Enter>
+
+" UltiSnippet Config
+let g:UltiSnipsExpandTrigger="<t>"               
+let g:UltiSnipsJumpForwardTrigger="<c-a>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+nnoremap <silent> <leader> :WhichKey '<tab>'<CR>
+
+nnoremap ,b :ls<CR>:buffer<Space>
+
+let g:floaterm_keymap_toggle = '<F12>'
+
+nnoremap tds :FloatermNew! --height=0.5 --width=0.4 --wintype=split --name=django-shell ds<cr>
+nnoremap trs :FloatermNew! --wintype=float --name=django-runserver drs<cr>
+nnoremap lgg :FloatermNew --wintype=flaot --height=0.8 --width=0.8 --name=lazygit lazygit<cr>
+nnoremap <leader>f :FloatermNew --wintype=flaot --opener=tabe --height=0.8 --width=0.8 --name=ranger ranger<cr>
+nnoremap <leader>tt :FloatermToggle --wintype=flaot --height=0.8 --width=0.8<cr>
+" Ranger Config
+let g:ranger_open_new_tab = 1
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <leader>tb <cmd>Telescope buffers<cr>
+noremap <leader>th <cmd>Telescope help_tags<cr>
+
+" Vim Wiki Config
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> gv :vsplit<CR><Plug>(coc-definition)<C-W>r
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>

@@ -1,0 +1,7 @@
+[style]
+based_on_style = pep8
+column_limit=131
+spaces_before_comment = 2
+split_before_logical_operator = true
+allow_split_before_dict_value = false
+split_arguments_when_comma_terminated = false

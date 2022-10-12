@@ -1,0 +1,90 @@
+# Ashish's Configurations
+#
+
+env:
+  TERM: alacritty
+
+
+# Window Configurations
+
+window:
+  # dynamic_padding: true
+  # dimensions:
+  #   columns: 100
+  #   lines: 40
+  padding:
+    x: 4
+    y: 0
+  startup_mode: SimpleFullscreen # Windowed # Maximized
+  decorations: None # full
+
+background_opacity: 0.95
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+  # Scrolling distance multiplier.
+  multiplier: 3
+
+font:
+  # Normal font face
+  normal:
+    # family: MesloLGS NF
+    # family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Light
+
+  # Bold font face
+  bold:
+    # family: MesloLGS NF
+    # family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Semibold 
+
+  # Italic font face
+  italic:
+    # family: MesloLGS NF
+    # family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Italic
+
+  bold_italic:
+    # family: MesloLGS NF
+    # family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Italic
+
+  # Font size
+  size: 18.0
+
+  offset:
+   x: 1
+   y: 2
+
+  glyph_offset:
+   x: 0
+   # Keeping this as half of offset to vertically align the text in cursor
+   y: 1
+
+  # Better font rendering for mac
+  use_thin_strokes: true
+
+custom_cursor_colors: true
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+draw_bold_text_with_bright_colors: true
+
+import:
+  # - ~/.config/alacritty/colors/ayu_dark.yml
+  # - ~/.config/alacritty/colors/hyper.yml
+  - ~/.config/alacritty/colors/kitty.yml
+  # - ~/.config/alacritty/colors/nightfox.yml
