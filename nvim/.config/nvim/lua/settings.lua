@@ -1,4 +1,6 @@
 HOME = os.getenv("HOME")
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- basic settings
 vim.o.encoding = "utf-8"
@@ -79,18 +81,34 @@ vim.cmd([[
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank{higroup="ToolbarButton", timeout=500}'
-vim.cmd 'au TextYankPost * lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}'
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}'
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
 
 vim.g.python3_host_prog = "/Users/ashishnayan/.pyenv/shims/python3"
 vim.g.python_host_prog = "/Users/ashishnayan/.pyenv/shims/python2"
 -- vim.cmd[[au FileType python setlocal formatprg=autopep8\ -]]
 
--- VimWiki 
+-- VimWiki
 vim.cmd[[let g:vimwiki_list= [{'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
 
 -- Trim trailing whitespaces
 vim.cmd[[
-  autocmd BufWritePost *.py,*.sql,*.js,*.jsx,*.ts,*.tsx,*.css :%s/\s\+$//e
+  autocmd BufWritePost *.py,*.lua,*.sql,*.js,*.jsx,*.ts,*.tsx,*.css :%s/\s\+$//e
+]]
+vim.cmd[[
+  autocmd BufWritePost  *.py :Format
 ]]
 -- vim.cmd[[
 --   autocmd BufWritePost * :%s/\s\+$//e

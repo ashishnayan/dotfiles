@@ -12,8 +12,19 @@ nmap('<C-j>', '<C-w>j')
 nmap('<C-k>', '<C-w>k')
 nmap('<C-l>', '<C-w>l')
 
+vmap("J", ":m '>+1<CR>gv=gv")
+vmap("K", ":m '<-2<CR>gv=gv")
 
 tmap('<Esc><Esc>', '<C-\\><C-n>')
+
+-- Clipboard
+nmap('<leader>y', '"+y')
+nmap('<leader>Y', '"+Y')
+vmap('<leader>y', '"+y')
+vmap('<leader>Y', '"+Y')
+
+nmap('<leader>p', '"+p')
+nmap('<leader>P', '"+P')
 
 -- Telescope KeyMappings
 nmap('<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -21,12 +32,16 @@ nmap('<leader>fg', '<cmd>Telescope live_grep<cr>')
 nmap('<leader>fb', '<cmd>Telescope buffers<cr>')
 nmap('<leader>fh', '<cmd>Telescope help_tags<cr>')
 
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+
 
 -- Floaterm KeyMappings
-nmap('<leader>r', '<cmd>FloatermNew --wintype=flaot --opener=tabe --height=0.8 --width=0.8 --name=ranger ranger<CR>')
-nmap('<leader>tt', '<cmd>FloatermToggle --wintype=flaot --height=0.8 --width=0.8<CR>')
-nmap('<leader>gg', '<cmd>FloatermNew --wintype=float --height=0.8 --width=0.8 --name=lazygit lazygit<CR>')
-
+-- nmap('<leader>r', '<cmd>FloatermNew --wintype=flaot --opener=tabe --height=0.8 --width=0.8 --name=ranger ranger<CR>')
+-- nmap('<leader>tt', '<cmd>FloatermToggle --wintype=flaot --height=0.8 --width=0.8<CR>')
+-- nmap('<leader>gg', '<cmd>FloatermNew --wintype=float --height=0.8 --width=0.8 --name=lazygit lazygit<CR>')
+--
 
 -- Nvim-Tree KeyMappings
 nmap('<leader>nt', '<cmd>NvimTreeToggle<CR>')
@@ -55,18 +70,18 @@ vim.api.nvim_set_keymap('n', '<leader>do', '<Plug>VimspectorShowOutput', {norema
 vim.api.nvim_set_keymap('n', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
 -- xmap <leader>vi <Plug>VimspectorBalloonEval
 vim.api.nvim_set_keymap('x', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint', {noremap=false, silent=ture})
-vim.api.nvim_set_keymap('n', '<leader>dl', '<Plug>VimspectorStepInto', {noremap=false, silent=ture})
-vim.api.nvim_set_keymap('n', '<leader>dj', '<Plug>VimspectorStepOver', {noremap=false, silent=ture})
-vim.api.nvim_set_keymap('n', '<leader>dk', '<Plug>VimspectorStepOut', {noremap=false, silent=ture})
+vim.api.nvim_set_keymap('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint', {noremap=false, silent=true})
+vim.api.nvim_set_keymap('n', '<leader>dl', '<Plug>VimspectorStepInto', {noremap=false, silent=true})
+vim.api.nvim_set_keymap('n', '<leader>dj', '<Plug>VimspectorStepOver', {noremap=false, silent=true})
+vim.api.nvim_set_keymap('n', '<leader>dk', '<Plug>VimspectorStepOut', {noremap=false, silent=true})
 
 nmap("<leader>dc", "<cmd>call vimspector#Continue()<CR>")
 
 -- Maximizer
-nmap("<leader>m", "<cmd>MaximizerToggle<CR>")
-vmap("<leader>m", "<cmd>MaximizerToggle<CR>gv")
-imap("<leader>m", "<C-o><cmd>MaximizerToggle<CR>")
-
+-- nmap("<leader>m", "<cmd>MaximizerToggle<CR>")
+-- vmap("<leader>m", "<cmd>MaximizerToggle<CR>gv")
+-- imap("<leader>m", "<C-o><cmd>MaximizerToggle<CR>")
+--
 -- Vim-Startify
 nmap("<leader>a", "<cmd>Startify<CR>")
 
@@ -85,5 +100,11 @@ nmap("<leader>a", "<cmd>Startify<CR>")
 -- nmap("]e", "Lspsaga diagnostic_jump_prev<CR>")
 
 
+-- Diagnostic Keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
 -- Bufferline
-nmap("<leader>v", "<cmd>BufferLinePick<CR>")
+-- nmap("<leader>v", "<cmd>BufferLinePick<CR>")

@@ -84,7 +84,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting poetry)
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -148,3 +148,4 @@ alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbi
 eval "$(pyenv init -)"
 
 export LS_COLORS="$(vivid generate molokai)"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'

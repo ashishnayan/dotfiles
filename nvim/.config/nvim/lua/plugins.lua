@@ -26,15 +26,20 @@ return require('packer').startup(function()
 
 
   -- LSP and Autocomplete
-  use 'neovim/nvim-lspconfig'
+  use { "williamboman/mason.nvim" }
+  use { "williamboman/mason-lspconfig.nvim" }
+  use { "neovim/nvim-lspconfig" }
+  use { 'folke/neodev.nvim' }
+
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
-  use 'williamboman/nvim-lsp-installer'
+  -- use 'williamboman/nvim-lsp-installer'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  
   -- Lua Snippets
   use 'saadparwaiz1/cmp_luasnip'
   use { 
@@ -121,7 +126,7 @@ return require('packer').startup(function()
   use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
 
   -- Bufferline 
-  use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+  use {'akinsho/bufferline.nvim', branch = 'main', requires = 'kyazdani42/nvim-web-devicons'}
 
   -- Auto-pair bracket
   use {'windwp/nvim-autopairs'}

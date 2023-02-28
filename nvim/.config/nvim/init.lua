@@ -1,18 +1,34 @@
-local fn = vim.fn
-local execute = vim.api.nvim_command
-
+-- local fn = vim.fn
+-- local execute = vim.api.nvim_command
+--
 -- Sensible defaults
 require('settings')
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+-- Packer Configurations
+-- local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+--   if fn.empty(fn.glob(install_path)) > 0 then
+--     execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+--   end
+--   vim.cmd [[packadd packer.nvim]]
+--   vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+--
+-- Lazy Plugin Manager
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-vim.cmd [[packadd packer.nvim]]
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+vim.opt.rtp:prepend(lazypath)
 
 -- Install plugins
-require('plugins')
+-- require('plugins')
+require('plugins_lazy')
 
 -- Utils
 require('utils')
@@ -23,7 +39,10 @@ require('keymappings')
 -- Configs
 require('plugins-config.telescope')
 require('plugins-config.lualine')
+
 -- require('plugins-config.airline')
+-- require('plugins-config.lspsaga')
+
 require('plugins-config.nvim-cmp')
 require('plugins-config.lsp')
 require('plugins-config.lightspeed')
@@ -31,10 +50,11 @@ require('plugins-config.vimspector')
 require('plugins-config.vim-startify')
 require('plugins-config.comment')
 require('plugins-config.todo-comment')
--- require('plugins-config.lspsaga')
-require("plugins-config.bufferline")
+-- require("plugins-config.bufferline")
 require("plugins-config.nvim-autopair")
 require("plugins-config.gitsigns")
+require("plugins-config.mason")
+require("plugins-config.treesitter")
 
 -- ColorScheme  --
 vim.o.background = 'dark'
@@ -72,7 +92,7 @@ vim.o.background = 'dark'
 -- ]]
 
 -- nightfox
-require("plugins-config.nightfox")
-vim.cmd[[
-  colorscheme nightfox
-]]
+-- require("plugins-config.nightfox")
+-- vim.cmd[[
+--  colorscheme nightfox
+-- ]]
