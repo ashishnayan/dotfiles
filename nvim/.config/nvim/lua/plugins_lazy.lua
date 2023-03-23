@@ -5,7 +5,7 @@ require('lazy').setup({
   'mhinz/vim-startify',
   'windwp/nvim-autopairs',
   'windwp/nvim-ts-autotag',
-  
+
    -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
@@ -108,5 +108,12 @@ require('lazy').setup({
       },
       config = function() require'nvim-tree'.setup {} end
 
+  },
+  -- Debugger DAP
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
+  { -- dap for python
+    'mfussenegger/nvim-dap-python',
+    config = function() require('dap-python').setup('/Users/ashishnayan/.pyenv/shims/python') end
   },
 }, {})

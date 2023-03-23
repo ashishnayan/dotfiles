@@ -84,7 +84,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting poetry)
+plugins=(git vi-mode fzf zsh-autosuggestions zsh-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,7 +126,7 @@ export PYGMENTIZE_STYLE=gruvbox-dark
 
 # Activate environment
 alias ap='source $(poetry env info --path)/bin/activate && source .env'
-alias aa="source venv/bin/activate && source .env"
+alias aa="source nvim-venv/bin/activate && source .env"
 
 # alias sshuat="ssh uat@uatserver.uplaon.ph -i ~/.ssh/id_rsa"
 alias sshuat="ssh uat@54.254.173.33 -i ~/.ssh/id_rsa"
@@ -137,7 +137,7 @@ alias drs="python manage.py runserver"
 alias dmk="python manage.py makemigrations"
 alias dm="python manage.py migrate"
 alias ds="python manage.py shell"
-alias nac="source nvim-venv/bin/activate && source .env"
+# alias nac="source nvim-venv/bin/activate && source .env"
 alias n="nvim"
 alias savii="cd ~/projects/savii/api/ && nac"
 alias ls="lsd --group-dirs first"

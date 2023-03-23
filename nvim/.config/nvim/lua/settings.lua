@@ -1,6 +1,6 @@
 HOME = os.getenv("HOME")
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- vim.g.mapleader = ' '
+-- vim.g.maplocalleader = ' '
 
 -- basic settings
 vim.o.encoding = "utf-8"
@@ -81,7 +81,7 @@ vim.cmd([[
 -- Highlight on yank
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank{higroup="ToolbarButton", timeout=500}'
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- vim.cmd 'au TextYankPost * lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}'
 
 -- [[ Highlight on yank ]]
@@ -104,17 +104,23 @@ vim.g.python_host_prog = "/Users/ashishnayan/.pyenv/shims/python2"
 vim.cmd[[let g:vimwiki_list= [{'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
 
 -- Trim trailing whitespaces
-vim.cmd[[
-  autocmd BufWritePost *.py,*.lua,*.sql,*.js,*.jsx,*.ts,*.tsx,*.css :%s/\s\+$//e
-]]
-vim.cmd[[
-  autocmd BufWritePost  *.py :Format
-]]
 -- vim.cmd[[
---   autocmd BufWritePost * :%s/\s\+$//e
+--   autocmd BufWritePre *.py,*.lua,*.sql,*.js,*.jsx,*.ts,*.tsx,*.css :%s/\s\+$//e
 -- ]]
+local group = vim.api.nvim_create_augroup("Formatter", {clear=true})
+vim.api.nvim_create_autocmd(
+  "BufWritePre",
+  {
+    pattern={"*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx", "*.css"},
+    command='%s/\\s\\+$//e',
+    group=group,
+  }
+)
+-- vim.cmd[[
+--  autocmd BufWritePost  *.py :Format
+-- ]]
+vim.api.nvim_create_autocmd("BufWritePre", {pattern={"*.py"}, command="Format", group=group})
 
--- Python specific settings
 vim.g.pyindent_open_paren = ''
 -- vim.cmd[[]]
 -- vim.g.pyindent_searchpair_timeout = 500

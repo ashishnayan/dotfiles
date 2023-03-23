@@ -18,7 +18,7 @@ window:
   startup_mode: SimpleFullscreen # Windowed # Maximized
   decorations: None # full
 
-background_opacity: 0.95
+window.opacity: 0.95
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -68,7 +68,7 @@ font:
    y: 1
 
   # Better font rendering for mac
-  use_thin_strokes: true
+  # use_thin_strokes: true
 
 custom_cursor_colors: true
 

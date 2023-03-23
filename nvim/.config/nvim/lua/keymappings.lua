@@ -49,8 +49,8 @@ nmap('<leader>nr', '<cmd>NvimTreeRefresh<CR>')
 nmap('<leader>nf', '<cmd>NvimTreeFindFile<CR>')
 
 -- Nav buffers
-vim.api.nvim_set_keymap('n', 'gb', '<cmd>bn<CR>', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', 'gB', '<cmd>bp<CR>', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', 'gb', ':bn<CR>', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', 'gB', ':bp<CR>', {noremap=false, silent=true})
 
 -- nmap('<leader>"', 'ciw"<C-r>-"')
 -- nmap("<leader>'", "ciw'<C-r>-'")
@@ -61,21 +61,21 @@ vim.api.nvim_set_keymap('n', 'gB', '<cmd>bp<CR>', {noremap=false, silent=true})
 -- imap('{', '{}<left>')
 
 -- Vimspector
-vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>call vimspector#Launch()<CR>', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>dr', '<cmd>VimspectorReset<CR>', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>de', '<Plug>VimspectorEval', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>dw', '<Plug>VimspectorWatch', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>do', '<Plug>VimspectorShowOutput', {noremap=false, silent=true})
--- nmap <leader>vi <Plug>VimspectorBalloonEval
-vim.api.nvim_set_keymap('n', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
--- xmap <leader>vi <Plug>VimspectorBalloonEval
-vim.api.nvim_set_keymap('x', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>dl', '<Plug>VimspectorStepInto', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>dj', '<Plug>VimspectorStepOver', {noremap=false, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>dk', '<Plug>VimspectorStepOut', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>call vimspector#Launch()<CR>', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dr', '<cmd>VimspectorReset<CR>', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>de', '<Plug>VimspectorEval', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dw', '<Plug>VimspectorWatch', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>do', '<Plug>VimspectorShowOutput', {noremap=false, silent=true})
+-- -- nmap <leader>vi <Plug>VimspectorBalloonEval
+-- vim.api.nvim_set_keymap('n', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
+-- -- xmap <leader>vi <Plug>VimspectorBalloonEval
+-- vim.api.nvim_set_keymap('x', '<leader>di', '<Plug>VimspectorBalloonEval', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>db', '<Plug>VimspectorToggleBreakpoint', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dl', '<Plug>VimspectorStepInto', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dj', '<Plug>VimspectorStepOver', {noremap=false, silent=true})
+-- vim.api.nvim_set_keymap('n', '<leader>dk', '<Plug>VimspectorStepOut', {noremap=false, silent=true})
 
-nmap("<leader>dc", "<cmd>call vimspector#Continue()<CR>")
+-- nmap("<leader>dc", "<cmd>call vimspector#Continue()<CR>")
 
 -- Maximizer
 -- nmap("<leader>m", "<cmd>MaximizerToggle<CR>")
