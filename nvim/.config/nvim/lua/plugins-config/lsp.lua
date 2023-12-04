@@ -1,5 +1,6 @@
+-- local navic = require("nvim-navic")
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -12,6 +13,9 @@ local on_attach = function(_, bufnr)
     end
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    --if (client.name ~= "tailwindcss" and client.name ~= "eslint") then
+    --navic.attach(client, bufnr)
+    -- end
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -26,7 +30,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<M-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -44,11 +48,17 @@ end
 
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+    completeUnimported = true,
+    usePlaceholders = true,
+    analyses = {
+      unusedparams = true,
+    },
+  },
   pylsp = {},
-  -- rust_analyzer = {},
+  -- rust_analyzer ={},
   tsserver = {},
-
+  jdtls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },

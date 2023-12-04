@@ -91,3 +91,7 @@ loc
 def
 logger
 loc
+on
+Enums
+help
+struct

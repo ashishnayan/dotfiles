@@ -33,9 +33,6 @@ require('plugins_lazy')
 -- Utils
 require('utils')
 
--- Keymappings
-require('keymappings')
-
 -- Configs
 require('plugins-config.telescope')
 require('plugins-config.lualine')
@@ -45,9 +42,10 @@ require('plugins-config.lualine')
 
 require('plugins-config.nvim-cmp')
 require('plugins-config.lsp')
-require('plugins-config.lightspeed')
+-- require('plugins-config.lightspeed')
 require('plugins-config.vimspector')
-require('plugins-config.vim-startify')
+-- require('plugins-config.vim-startify')
+require('plugins-config.dashboard')
 require('plugins-config.comment')
 require('plugins-config.todo-comment')
 -- require("plugins-config.bufferline")
@@ -55,12 +53,33 @@ require("plugins-config.nvim-autopair")
 require("plugins-config.gitsigns")
 require("plugins-config.mason")
 require("plugins-config.treesitter")
+-- require("plugins-config.navic")
+require("plugins-config.indent-blank-line")
+require("plugins-config.nvim-dap")
+require("plugins-config.neogen")
+
+-- Keymappings
+require('keymappings')
 
 -- ColorScheme  --
-vim.o.background = 'dark'
+-- require("plugins-config.themes.onedark")
+-- vim.o.background = 'dark'
+-- vim.cmd.colorscheme 'onedark'
+
+-- Kanagawa
+-- require('plugins-config.themes.kanagawa')
+-- vim.cmd.colorscheme 'kanagawa'
+
+-- Moonfly
+--
+-- vim.cmd.colorscheme 'moonfly'
+
+-- catppuccin
+require('plugins-config.themes.catppuccin')
+vim.cmd.colorscheme "catppuccin"
 
 -- Tokoyodark
--- require('plugins-config.tokyodark')
+-- require('plugins-config.themes.tokyodark')
 -- vim.cmd("colorscheme tokyodark")
 -- vim.cmd("hi Visual cterm=reverse gui=reverse")
 -- cterm=reverse ctermbg=242 gui=reverse guibg=DarkGrey
@@ -75,7 +94,7 @@ vim.o.background = 'dark'
 --   colorscheme gruvbox-material
 -- ]]
 
--- Vscode 
+-- Vscode
 -- vim.g.vscode_style = "dark"
 -- vim.cmd[[colorscheme vscode]]
 

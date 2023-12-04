@@ -1,3 +1,5 @@
+local telescope = require('telescope.builtin')
+
 -- split nav
 tmap('<C-h>', '<C-\\><C-N><C-w>h')
 tmap('<C-j>', '<C-\\><C-N><C-w>j')
@@ -31,10 +33,13 @@ nmap('<leader>ff', '<cmd>Telescope find_files<cr>')
 nmap('<leader>fg', '<cmd>Telescope live_grep<cr>')
 nmap('<leader>fb', '<cmd>Telescope buffers<cr>')
 nmap('<leader>fh', '<cmd>Telescope help_tags<cr>')
+nmap('<leader>fr', '<cmd>Telescope registers<cr>')
+nmap('<leader>fi', '<cmd>Telescope import<cr>')
 
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>?', telescope.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>fd', telescope.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>fw', telescope.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>fR', telescope.lsp_references, { desc = '[S]earch References for current [W]ord' })
 
 
 -- Floaterm KeyMappings
@@ -83,7 +88,10 @@ nmap('<leader>nf', '<cmd>NvimTreeFindFile<CR>')
 -- imap("<leader>m", "<C-o><cmd>MaximizerToggle<CR>")
 --
 -- Vim-Startify
-nmap("<leader>a", "<cmd>Startify<CR>")
+-- nmap("<leader>a", "<cmd>Startify<CR>")
+
+-- Dashboard
+vim.keymap.set('n', '<leader>a', "<cmd>Dashboard<CR>")
 
 -- LspSaga
 -- nmap("gl", "<cmd>Lspsaga lsp_finder<CR>")
@@ -99,12 +107,41 @@ nmap("<leader>a", "<cmd>Startify<CR>")
 -- nmap("[e", "Lspsaga diagnostic_jump_next<CR>")
 -- nmap("]e", "Lspsaga diagnostic_jump_prev<CR>")
 
+vim.keymap.set('n', '[d', "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+vim.keymap.set('n', ']d', "<cmd>Lspsaga diagnostic_jump_next<CR>")
+vim.keymap.set('n', '<M-p>', "<cmd>Lspsaga peek_definition<CR>")
+vim.keymap.set('n', '<M-z>', "<cmd>Lspsaga finder<CR>")
+
 
 -- Diagnostic Keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- Nvim Harpoon
+vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file)
+vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu)
+vim.keymap.set('n', '<leader>hh', require("harpoon.ui").nav_next)
+vim.keymap.set('n', '<leader>hl', require("harpoon.ui").nav_prev)
 
 -- Bufferline
 -- nmap("<leader>v", "<cmd>BufferLinePick<CR>")
+--
+
+-- Gitsigns --
+nmap('<leader>gb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+
+-- nvim-dap
+vim.keymap.set('n', "<leader>dt", ":lua require('dapui').toggle()<CR>", { noremap = true })
+vim.keymap.set('n', "<leader>db", ":DapToggleBreakpoint<CR>", { noremap = true })
+vim.keymap.set('n', "<leader>dc", ":DapContinue<CR>", { noremap = true })
+-- vim.keymap.set('n', "<leader>du", ":lua require('dapui').open({reset = true})<CR>", { noremap = true })
+vim.keymap.set('n', '<leader>ds', require 'dap'.step_over)
+vim.keymap.set('n', '<leader>di', require 'dap'.step_into)
+vim.keymap.set('n', '<leader>do', require 'dap'.step_out)
+
+-- Neogen: To generate doc-strings
+vim.keymap.set('n', '<M-d>', require 'neogen'.generate)
+vim.keymap.set('n', '<M-n>', require 'neogen'.jump_next)
+vim.keymap.set('n', '<M-b>', require 'neogen'.jump_prev)

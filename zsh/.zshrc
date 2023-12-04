@@ -139,7 +139,7 @@ alias dm="python manage.py migrate"
 alias ds="python manage.py shell"
 # alias nac="source nvim-venv/bin/activate && source .env"
 alias n="nvim"
-alias savii="cd ~/projects/savii/api/ && nac"
+alias savii="cd ~/projects/savii/api/ && aa"
 alias ls="lsd --group-dirs first"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
 
@@ -149,3 +149,4 @@ eval "$(pyenv init -)"
 
 export LS_COLORS="$(vivid generate molokai)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export DISABLE_AUTO_TITLE='true'

@@ -3,6 +3,7 @@
 
 env:
   TERM: alacritty
+  # TERM: xterm-256colour
 
 
 # Window Configurations
@@ -17,8 +18,13 @@ window:
     y: 0
   startup_mode: SimpleFullscreen # Windowed # Maximized
   decorations: None # full
-
-window.opacity: 0.95
+  # Make `Option` key behave as `Alt` (macOS only):
+  #   - OnlyLeft
+  #   - OnlyRight
+  #   - Both
+  #   - None (default)
+  option_as_alt: OnlyLeft
+  opacity: 0.98
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -31,44 +37,64 @@ font:
   # Normal font face
   normal:
     # family: MesloLGS NF
-    # family: Source Code Pro
+    # family: Source Code Pro for Powerline
     family: SauceCodePro Nerd Font
+    # family: RobotoMono Nerd Font Mono
+    # family: Hack Nerd Font
+    # family: JetBrainsMono Nerd Font Mono
+    # family: FiraCode Nerd Font
     style: Light
+    # style: Thin
 
   # Bold font face
   bold:
     # family: MesloLGS NF
     # family: Source Code Pro
+    # family: RobotoMono Nerd Font
+    # family: Hack Nerd Font
     family: SauceCodePro Nerd Font
-    style: Semibold 
+    # family: JetBrainsMono Nerd Font Mono
+    # family: FiraCode Nerd Font
+    style: Semibold
+    # style: Regular
 
   # Italic font face
   italic:
     # family: MesloLGS NF
     # family: Source Code Pro
+    # family: RobotoMono Nerd Font Mono
+    # family: Hack Nerd Font
     family: SauceCodePro Nerd Font
-    style: Italic
+    # family: JetBrainsMono Nerd Font Mono
+    style:  Light Italic
 
   bold_italic:
     # family: MesloLGS NF
-    # family: Source Code Pro
+    # family: Source Code Pro for Powerline
+    # family: RobotoMono Nerd Font
+    # family: Hack Nerd Font
     family: SauceCodePro Nerd Font
-    style: Italic
+    # family: JetBrainsMono Nerd Font Mono
+    style: Medium Italic
+    # style: Italic
 
   # Font size
-  size: 18.0
+  size: 20.0
 
   offset:
-   x: 1
-   y: 2
+    x: 1
+    y: 2
 
   glyph_offset:
-   x: 0
-   # Keeping this as half of offset to vertically align the text in cursor
-   y: 1
-
-  # Better font rendering for mac
-  # use_thin_strokes: true
+    x: 0
+    # Keeping this as half of offset to vertically align the text in cursor
+    y: 1
+  # Use built-in font for box drawing characters.
+  #
+  # If `true`, Alacritty will use a custom built-in font for box drawing
+  # characters (Unicode points 2500 - 259f).
+  #
+  builtin_box_drawing: true
 
 custom_cursor_colors: true
 
@@ -78,6 +104,26 @@ selection:
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
 
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Off
+
 # Live config reload (changes require restart)
 live_config_reload: true
 
@@ -85,6 +131,11 @@ draw_bold_text_with_bright_colors: true
 
 import:
   # - ~/.config/alacritty/colors/ayu_dark.yml
+  # - ~/.config/alacritty/colors/material_theme.yml
   # - ~/.config/alacritty/colors/hyper.yml
-  - ~/.config/alacritty/colors/kitty.yml
+  # - ~/.config/alacritty/colors/kitty.yml
   # - ~/.config/alacritty/colors/nightfox.yml
+  - ~/.config/alacritty/colors/catppuccin/catppuccin-mocha.yml
+  # - ~/.config/alacritty/colors/catppuccin/catppuccin-macchiato.yml
+  # - ~/.config/alacritty/colors/catppuccin/catppuccin-frappe.yml
+  # - ~/.config/alacritty/colors/catppuccin/catppuccin-latte.yml

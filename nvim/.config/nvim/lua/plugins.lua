@@ -1,7 +1,7 @@
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
   use 'wbthomason/packer.nvim'
-  
+
   -- Color scheme
   use { 'sainnhe/gruvbox-material' }
   use { 'navarasu/onedark.nvim' }
@@ -39,10 +39,10 @@ return require('packer').startup(function()
   -- use 'williamboman/nvim-lsp-installer'
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  
+
   -- Lua Snippets
   use 'saadparwaiz1/cmp_luasnip'
-  use { 
+  use {
     'L3MON4D3/LuaSnip',
   }
   use 'onsails/lspkind-nvim'
@@ -68,7 +68,7 @@ return require('packer').startup(function()
 
   -- Fugitive for Git
 --  use { 'tpope/vim-fugitive' }
-  
+
   -- Gitsigns
   use {
     'lewis6991/gitsigns.nvim',
@@ -81,6 +81,15 @@ return require('packer').startup(function()
     -- end
   }
 
+  -- nvim Harpoon
+  use {
+    'ThePrimeagen/harpoon',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    run = require("telescope").load_extension('harpoon'),
+  }
+
   -- Nvim-Tree
   use {
     'kyazdani42/nvim-tree.lua',
@@ -91,7 +100,7 @@ return require('packer').startup(function()
   }
 
   -- indent-blankline
-  use { 
+  use {
     "lukas-reineke/indent-blankline.nvim",
     config = function() require'indent_blankline'.setup {
         show_current_context = false,
@@ -125,7 +134,7 @@ return require('packer').startup(function()
   -- Todo Comment
   use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
 
-  -- Bufferline 
+  -- Bufferline
   use {'akinsho/bufferline.nvim', branch = 'main', requires = 'kyazdani42/nvim-web-devicons'}
 
   -- Auto-pair bracket
