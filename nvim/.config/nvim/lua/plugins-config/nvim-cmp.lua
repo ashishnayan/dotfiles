@@ -2,6 +2,7 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+local HOME = os.getenv("HOME")
 
 luasnip.config.setup {}
 
@@ -55,19 +56,19 @@ cmp.setup.cmdline({ '/', '?' }, {
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   })
+-- })
 
 require("luasnip/loaders/from_vscode").lazy_load(
   {
-    paths = "/Users/ashishnayan/.config/snippets",
+    paths = HOME .. "/.config/snippets",
     -- include = {"python", "markdown", "lua", "javascript", "html", "go", "sql"}
   }
 )
