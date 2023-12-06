@@ -1,4 +1,4 @@
-HOME = os.getenv("HOME")
+local HOME = os.getenv("HOME")
 -- vim.g.mapleader = ' '
 -- vim.g.maplocalleader = ' '
 
@@ -104,13 +104,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-
-vim.g.python3_host_prog = "/Users/ashishnayan/.pyenv/versions/py3.11nvim/bin/python3"
-vim.g.python_host_prog = "/Users/ashishnayan/.pyenv/versions/py2nvim/bin/python2"
+vim.g.python3_host_prog = HOME .. "/.pyenv/versions/py3.11nvim/bin/python3"
+vim.g.python_host_prog = HOME .. "/.pyenv/versions/py2nvim/bin/python2"
 -- vim.cmd[[au FileType python setlocal formatprg=autopep8\ -]]
 
 -- VimWiki
-vim.cmd [[let g:vimwiki_list= [{'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
+vim.cmd [[let g:vimwiki_list= [{'path': '$HOME/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]]
 
 -- Trim trailing whitespaces
 -- vim.cmd[[

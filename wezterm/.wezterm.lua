@@ -28,12 +28,12 @@ config.font = wezterm.font('SauceCodePro Nerd Font', { weight = 'Light' })
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
 -- and finally, return the configuration to wezterm
 
-config.font_size = 23
+config.font_size = 17
 config.bold_brightens_ansi_colors = true
 -- config.line_height = 1
 
 
-config.term = 'alacritty'
+-- config.term = 'alacritty'
 -- config.term = 'wezterm'
 config.enable_tab_bar = false
 config.force_reverse_video_cursor = true
