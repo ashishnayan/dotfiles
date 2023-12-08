@@ -36,6 +36,7 @@ require('utils')
 -- Configs
 require('plugins-config.telescope')
 require('plugins-config.lualine')
+require('plugins-config.noice')
 
 -- require('plugins-config.airline')
 -- require('plugins-config.lspsaga')
