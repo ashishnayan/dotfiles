@@ -25,7 +25,7 @@ window:
   #   - Both
   #   - None (default)
   option_as_alt: OnlyLeft
-  opacity: 0.98
+  opacity: 0.8
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -44,7 +44,8 @@ font:
     # family: Hack Nerd Font
     # family: JetBrainsMono Nerd Font Mono
     # family: FiraCode Nerd Font
-    style: Light
+    # style: Light
+    style: Regular
     # style: Thin
 
   # Bold font face
@@ -57,7 +58,7 @@ font:
     # family: JetBrainsMono Nerd Font Mono
     # family: FiraCode Nerd Font
     # style: Semi Bold
-    style: Medium
+    style: Bold
     # style: Regular
 
   # Italic font face
@@ -68,7 +69,8 @@ font:
     # family: Hack Nerd Font
     family: SauceCodePro Nerd Font
     # family: JetBrainsMono Nerd Font Mono
-    style:  Light Italic
+    # style:  Light Italic
+    style: Italic
 
   bold_italic:
     # family: MesloLGS NF
@@ -77,11 +79,12 @@ font:
     # family: Hack Nerd Font
     family: SauceCodePro Nerd Font
     # family: JetBrainsMono Nerd Font Mono
-    style: Medium Italic
+    # style: Medium Italic
+    style: Bold Italic
     # style: Italic
 
   # Font size
-  size: 18.0
+  size: 14.0
 
   offset:
     x: 1
@@ -141,3 +144,8 @@ import:
   # - ~/.config/alacritty/colors/catppuccin/catppuccin-macchiato.yml
   # - ~/.config/alacritty/colors/catppuccin/catppuccin-frappe.yml
   # - ~/.config/alacritty/colors/catppuccin/catppuccin-latte.yml
+
+shell:
+  program: /usr/bin/tmux
+  args:
+    - -u
