@@ -1,6 +1,5 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append "c"
-local HOME = os.getenv("HOME")
 
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
@@ -112,20 +111,21 @@ for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("../snippets/*.lua", true
   loadfile(ft_path)()
 end
 
-require("luasnip/loaders/from_vscode").lazy_load(
-  {
-    paths = HOME .. "/.config/snippets",
-    -- include = {"python", "markdown", "lua", "javascript", "html", "go", "sql"}
-  }
-)
+-- require("luasnip/loaders/from_vscode").lazy_load(
+--   {
+--     paths = HOME .. "/.config/snippets",
+--     -- include = {"python", "markdown", "lua", "javascript", "html", "go", "sql"}
+--   }
+-- )
+require("luasnip.loaders.from_vscode").lazy_load()
 
-vim.keymap.set({ "i", "s" }, "<M-k>", function()
+vim.keymap.set({ "i", "s" }, "<C-n>", function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
 end, { silent = true })
 
-vim.keymap.set({ "i", "s" }, "<M-j>", function()
+vim.keymap.set({ "i", "s" }, "<C-p>", function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
