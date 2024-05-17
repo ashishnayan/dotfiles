@@ -119,7 +119,7 @@ local group = vim.api.nvim_create_augroup("Formatter", { clear = true })
 vim.api.nvim_create_autocmd(
   "BufWritePre",
   {
-    pattern = { "*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.go", "*.yml", "*.yaml" },
+    pattern = { "*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.go", "*.yml", "*.yaml", ".rs", },
     command = '%s/\\s\\+$//e',
     group = group,
   }
@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd("BufWritePre",
   {
     pattern = {
-      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua"
+      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua", "*.rs",
     },
     command = "Format",
     group = group
