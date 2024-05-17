@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd("BufWritePre",
   {
     pattern = {
-      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua", "*.rs"
+      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua", "*.rs",
     },
     command = "Format",
     group = group

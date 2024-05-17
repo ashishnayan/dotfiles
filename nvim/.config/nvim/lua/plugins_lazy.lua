@@ -6,6 +6,13 @@ require('lazy').setup({
   'windwp/nvim-autopairs',
   'windwp/nvim-ts-autotag',
 
+  -- oil.nvim
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim',    opts = {} },
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
@@ -98,9 +105,14 @@ require('lazy').setup({
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
+    lazy = false,
+    priority = 100,
     dependencies = {
+      "onsails/lspkind.nvim",
       'hrsh7th/cmp-nvim-lsp',
       'L3MON4D3/LuaSnip',
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer",
       'saadparwaiz1/cmp_luasnip'
     },
   },

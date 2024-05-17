@@ -40,6 +40,7 @@ require('plugins-config.noice')
 
 -- require('plugins-config.airline')
 -- require('plugins-config.lspsaga')
+require('plugins-config.oil')
 
 require('plugins-config.nvim-cmp')
 require('plugins-config.lsp')

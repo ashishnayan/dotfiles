@@ -145,3 +145,6 @@ vim.keymap.set('n', '<leader>do', require 'dap'.step_out)
 vim.keymap.set('n', '<M-d>', require 'neogen'.generate)
 vim.keymap.set('n', '<M-n>', require 'neogen'.jump_next)
 vim.keymap.set('n', '<M-b>', require 'neogen'.jump_prev)
+
+-- oil.nvim
+vim.keymap.set('n', '-', require 'oil'.open, { desc = "Open parent directory" })
