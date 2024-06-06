@@ -1,6 +1,6 @@
 local HOME = os.getenv("HOME")
--- vim.g.mapleader = ' '
--- vim.g.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- basic settings
 vim.o.encoding = "utf-8"
@@ -24,9 +24,10 @@ vim.o.laststatus     = 2    -- always show status line
 
 vim.o.list           = true -- do not display white characters
 -- vim.opt.listchars:append("space:⋅")
-vim.o.foldenable     = false
+vim.o.foldenable     = true
 vim.o.foldlevel      = 4 -- limit folding to 4 levels
-vim.o.foldmethod     = 'syntax' -- use language syntax to generate folds
+vim.o.foldcolumn     = '0'
+-- vim.o.foldmethod     = 'expr' -- use language syntax to generate folds
 vim.o.wrap           = false --do not wrap lines even if very long
 vim.o.eol            = false -- show if there's no eol char
 vim.o.showbreak      = '↪' -- character to show when line is broken
