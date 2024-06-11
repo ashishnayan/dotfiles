@@ -120,10 +120,10 @@ vim.keymap.set('n', '<M-z>', "<cmd>Lspsaga finder<CR>")
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Nvim Harpoon
-vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file)
-vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu)
-vim.keymap.set('n', '<leader>hh', require("harpoon.ui").nav_next)
-vim.keymap.set('n', '<leader>hl', require("harpoon.ui").nav_prev)
+-- vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file)
+-- vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu)
+-- vim.keymap.set('n', '<leader>hh', require("harpoon.ui").nav_next)
+-- vim.keymap.set('n', '<leader>hl', require("harpoon.ui").nav_prev)
 
 -- Bufferline
 -- nmap("<leader>v", "<cmd>BufferLinePick<CR>")
@@ -148,3 +148,7 @@ vim.keymap.set('n', '<M-b>', require 'neogen'.jump_prev)
 
 -- oil.nvim
 vim.keymap.set('n', '-', require 'oil'.open, { desc = "Open parent directory" })
+
+-- ufo.nvim
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)

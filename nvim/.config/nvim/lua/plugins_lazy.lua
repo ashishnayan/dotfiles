@@ -13,8 +13,20 @@ require('lazy').setup({
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  -- vim code folding
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    config = function()
+      require 'ufo'.setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { 'lsp', 'indent' }
+        end,
+      })
+    end
+  },
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  -- { 'numToStr/Comment.nvim',    opts = {} },
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
 
   -- Detect tabstop and shiftwidth automatically
@@ -66,7 +78,7 @@ require('lazy').setup({
   {
     "rebelot/kanagawa.nvim", priority = 1000,
   },
-  { "catppuccin/nvim",               name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",          name = "catppuccin",                   priority = 1000 },
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -134,7 +146,7 @@ require('lazy').setup({
     "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}
   },
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*',       dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', version = '*',    dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -197,11 +209,11 @@ require('lazy').setup({
   -- { "SmiteshP/nvim-navic",       dependencies = { "neovim/nvim-lspconfig" }, },
   { -- nvim - harpoon
     'ThePrimeagen/harpoon',
+    branch = "harpoon2",
     dependencies = {
       'nvim-lua/plenary.nvim'
     },
-    config = function() require('telescope').load_extension('harpoon') end
-
+    -- config = function() require('telescope').load_extension('harpoon') end
   },
   -- Debugger DAP
   {
@@ -232,7 +244,7 @@ require('lazy').setup({
     config = function() require('dap-python').setup('/Users/ashishnayan/.pyenv/versions/py3.11nvim/bin/python') end
   },
   { 'vimwiki/vimwiki' },
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+  { "bluz71/vim-moonfly-colors",     name = "moonfly", lazy = false,                              priority = 1000 },
   {
     -- nvim - flash
     "folke/flash.nvim",
