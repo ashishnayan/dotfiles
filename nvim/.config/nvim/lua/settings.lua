@@ -25,7 +25,7 @@ vim.o.laststatus     = 2    -- always show status line
 vim.o.list           = true -- do not display white characters
 -- vim.opt.listchars:append("space:⋅")
 vim.o.foldenable     = true
-vim.o.foldlevel      = 4 -- limit folding to 4 levels
+vim.o.foldlevel      = 99 -- limit folding to 4 levels
 vim.o.foldcolumn     = '0'
 -- vim.o.foldmethod     = 'expr' -- use language syntax to generate folds
 vim.o.wrap           = false --do not wrap lines even if very long
