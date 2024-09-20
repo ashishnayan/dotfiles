@@ -55,9 +55,16 @@ local servers = {
       unusedparams = true,
     },
   },
-  pylsp = {},
+  pylsp = {
+    plugins = {
+      flake8 = {
+        ignore = { 'W503', 'W391' },
+        maxLineLength = 131,
+      }
+    }
+  },
   -- rust_analyzer ={},
-  tsserver = {},
+  ts_ls = {},
   jdtls = {},
   lua_ls = {
     Lua = {

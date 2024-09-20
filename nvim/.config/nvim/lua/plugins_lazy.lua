@@ -111,6 +111,12 @@ require('lazy').setup({
     },
   },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+  {
     'L3MON4D3/LuaSnip',
     version = "v2.*",
     build = "make install_jsregexp",
