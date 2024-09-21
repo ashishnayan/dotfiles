@@ -57,7 +57,7 @@ local servers = {
   },
   pylsp = {},
   -- rust_analyzer ={},
-  tsserver = {},
+  ts_ls = {},
   jdtls = {},
   lua_ls = {
     Lua = {

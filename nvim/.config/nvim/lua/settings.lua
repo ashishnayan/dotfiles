@@ -25,7 +25,7 @@ vim.o.laststatus     = 2    -- always show status line
 vim.o.list           = true -- do not display white characters
 -- vim.opt.listchars:append("space:⋅")
 vim.o.foldenable     = true
-vim.o.foldlevel      = 4 -- limit folding to 4 levels
+vim.o.foldlevel      = 99 -- limit folding to 4 levels
 vim.o.foldcolumn     = '0'
 -- vim.o.foldmethod     = 'expr' -- use language syntax to generate folds
 vim.o.wrap           = false --do not wrap lines even if very long
@@ -120,7 +120,8 @@ local group = vim.api.nvim_create_augroup("Formatter", { clear = true })
 vim.api.nvim_create_autocmd(
   "BufWritePre",
   {
-    pattern = { "*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.go", "*.yml", "*.yaml", ".rs", },
+    pattern = { "*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx",
+      "*.css", "*.go", "*.yml", "*.yaml", "*.rs", "*.json", },
     command = '%s/\\s\\+$//e',
     group = group,
   }
@@ -131,7 +132,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd("BufWritePre",
   {
     pattern = {
-      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua", "*.rs",
+      "*.py", "*.go", "*.tsx", "*.jsx", "*.js", "*.css", "*.lua", "*.rs", "*.json",
     },
     command = "Format",
     group = group

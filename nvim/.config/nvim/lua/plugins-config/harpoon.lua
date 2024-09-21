@@ -17,8 +17,8 @@ local function toggle_telescope(harpoon_files)
     sorter = conf.generic_sorter({}),
   }):find()
 end
-vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>hh", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<leader>hl", function() harpoon:list():next() end)
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "[Harpoon] Mark file" })
+vim.keymap.set("n", "<leader>hh", function() harpoon:list():prev() end, { desc = "[Harpoon] Prev file" })
+vim.keymap.set("n", "<leader>hl", function() harpoon:list():next() end, { desc = "[Harpoon] Next file" })
 vim.keymap.set("n", "<leader>hm", function() toggle_telescope(harpoon:list()) end,
   { desc = "Open harpoon window" })
