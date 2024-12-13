@@ -56,10 +56,18 @@ local servers = {
     },
   },
   pylsp = {
-    plugins = {
-      flake8 = {
-        ignore = { 'W503', 'W391' },
-        maxLineLength = 131,
+    pylsp = {
+      configurationSources = { "flake8" },
+      plugins = {
+        flake8 = {
+          enabled = true,
+          -- config = "/home/ashish/.flake8",
+          ignore = { 'W503', 'W391' },
+          maxLineLength = 131,
+        },
+        black = {
+          line_length = 100,
+        },
       }
     }
   },
@@ -89,6 +97,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true,
 }
 
 mason_lspconfig.setup_handlers {
