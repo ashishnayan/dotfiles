@@ -49,7 +49,6 @@ require('gitsigns').setup {
   },
   on_attach                    = function(bufnr)
     local gs = package.loaded.gitsigns
-
     local function map(mode, l, r, opts)
       opts = opts or {}
       opts.buffer = bufnr
@@ -84,7 +83,9 @@ require('gitsigns').setup {
     map('n', '<leader>hD', function() gs.diffthis('~') end)
     map('n', '<leader>td', gs.toggle_deleted)
 
+
     -- Text object
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+
