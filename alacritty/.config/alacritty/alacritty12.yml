@@ -909,3 +909,10 @@ env:
 
   # Highlight window damage information.
   #highlight_damage: false
+
+
+shell:
+ program: tmux
+ args:
+   - u
+

@@ -18,7 +18,7 @@ end
 config.color_scheme = 'catppuccin-macchiato'
 
 -- config.font = wezterm.font 'FiraCode Nerd Font'
--- config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
+-- config.font = wezterm.font('JetBrainsMono NF', { weight = 'Light' })
 -- config.font = wezterm.font 'Source Code Pro'
 -- config.font = wezterm.font 'SauceCodePro Nerd Font'
 config.font = wezterm.font('SauceCodePro Nerd Font', { weight = 'Light' })
@@ -27,11 +27,13 @@ config.font = wezterm.font('SauceCodePro Nerd Font', { weight = 'Light' })
 -- for example, this selects a Bold, Italic font variant.
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Bold', italic = true })
 -- and finally, return the configuration to wezterm
+config.font = wezterm.font_with_fallback {
+  'JetBrainsMono NF',
+}
 
 config.font_size = 18
 config.bold_brightens_ansi_colors = true
 -- config.line_height = 1
-
 
 config.term = 'alacritty'
 -- config.term = 'wezterm'

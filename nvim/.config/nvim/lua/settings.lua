@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd(
   "BufWritePre",
   {
     pattern = { "*.py", "*.lua", "*.sql", "*.js", "*.jsx", "*.ts", "*.tsx",
-      "*.css", "*.go", "*.yml", "*.yaml", "*.rs", "*.json", },
+      "*.css", "*.go", "*.yml", "*.yaml", "*.rs", "*.json", "*.toml" },
     command = '%s/\\s\\+$//e',
     group = group,
   }

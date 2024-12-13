@@ -130,6 +130,12 @@ require('lazy').setup({
     },
   },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+  {
     'L3MON4D3/LuaSnip',
     version = "v2.*",
     build = "make install_jsregexp",
@@ -150,16 +156,6 @@ require('lazy').setup({
   },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
   },
   { -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}

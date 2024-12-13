@@ -1,6 +1,5 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append "c"
--- local HOME = os.getenv("HOME")
 
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 

@@ -152,3 +152,11 @@ vim.keymap.set('n', '-', require 'oil'.open, { desc = "Open parent directory" })
 -- ufo.nvim
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+-- lsp_lines
+vim.keymap.set(
+  "",
+  "<Leader>l",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+)
