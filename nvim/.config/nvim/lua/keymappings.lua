@@ -19,6 +19,9 @@ vmap("K", ":m '<-2<CR>gv=gv")
 
 tmap('<Esc><Esc>', '<C-\\><C-n>')
 
+vim.keymap.set('n', '<M-o>', '<cmd>copen<CR>', { desc = 'Quickfix open' })
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>', { desc = 'Quickfix next' })
+vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>', { desc = 'Quickfix prev' })
 -- Clipboard
 nmap('<leader>y', '"+y')
 nmap('<leader>Y', '"+Y')
@@ -42,6 +45,9 @@ vim.keymap.set('n', '<leader>fw', telescope.grep_string, { desc = '[S]earch curr
 vim.keymap.set('n', '<leader>fR', telescope.lsp_references, { desc = '[S]earch References for current [W]ord' })
 
 
+-- Snacks
+vim.keymap.set('n', "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
+vim.keymap.set('n', "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit" })
 -- Floaterm KeyMappings
 -- nmap('<leader>r', '<cmd>FloatermNew --wintype=flaot --opener=tabe --height=0.8 --width=0.8 --name=ranger ranger<CR>')
 -- nmap('<leader>tt', '<cmd>FloatermToggle --wintype=flaot --height=0.8 --width=0.8<CR>')

@@ -74,26 +74,26 @@ require('lazy').setup({
       require 'colorizer'.setup({})
     end,
   },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
-  },
-  {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- },
+  -- {
+  --   'glepnir/dashboard-nvim',
+  --   event = 'VimEnter',
+  --   dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  -- },
   {
     "rebelot/kanagawa.nvim", priority = 1000,
   },
@@ -161,7 +161,7 @@ require('lazy').setup({
     "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}
   },
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*',    dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -259,7 +259,31 @@ require('lazy').setup({
     config = function() require('dap-python').setup('/Users/ashishnayan/.pyenv/versions/py3.11nvim/bin/python') end
   },
   { 'vimwiki/vimwiki' },
-  { "bluz71/vim-moonfly-colors",     name = "moonfly", lazy = false,                              priority = 1000 },
+  { 'echasnovski/mini.icons',        version = '*' },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      lazygit = { enabled = true },
+      notifier = {
+        enabled = true,
+        style = "compact",
+        timeout = 2500,
+      },
+      quickfile = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+    },
+  },
   {
     -- nvim - flash
     "folke/flash.nvim",
