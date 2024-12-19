@@ -43,7 +43,7 @@ require('plugins-config.harpoon')
 -- require('plugins-config.lspsaga')
 require('plugins-config.oil')
 
-require('plugins-config.nvim-cmp')
+--  require('plugins-config.nvim-cmp')
 require('plugins-config.lsp')
 -- require('plugins-config.lightspeed')
 require('plugins-config.vimspector')
