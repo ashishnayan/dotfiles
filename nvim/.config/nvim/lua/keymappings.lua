@@ -155,14 +155,18 @@ vim.keymap.set('n', '<M-b>', require 'neogen'.jump_prev)
 -- oil.nvim
 vim.keymap.set('n', '-', require 'oil'.open, { desc = "Open parent directory" })
 
--- ufo.nvim
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
--- lsp_lines
-vim.keymap.set(
-  "",
-  "<Leader>l",
-  require("lsp_lines").toggle,
-  { desc = "Toggle lsp_lines" }
-)
+-- -- ufo.nvim
+-- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+-- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+--
+-- -- lsp_lines
+-- vim.keymap.set(
+--   "",
+--   "<Leader>l",
+--   require("lsp_lines").toggle,
+--   { desc = "Toggle lsp_lines" }
+-- )
+--
+-- Prettier  Formatting
+vim.keymap.set('n', '<leader>fp', ':!prettier --write %<CR><CR>',
+  { noremap = false, silent = true, desc = "Prettier Format" })

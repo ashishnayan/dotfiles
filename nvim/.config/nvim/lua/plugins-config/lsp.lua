@@ -40,9 +40,15 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
+  if client.name == "eslint" then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
+    vim.lsp.buf.format();
   end, { desc = 'Format current buffer with LSP' })
 end
 
@@ -86,9 +92,9 @@ local servers = {
 require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-capabilities = require('blink.cmp').get_lsp_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
@@ -110,3 +116,13 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+--
+-- local null_ls = require("null-ls")
+--
+-- null_ls.setup {
+--   on_attach = on_attach,
+--   sources = {
+--     null_ls.builtins.code_actions.eslint,
+--     null_ls.builtins.formatting.prettier,
+--   },
+-- }

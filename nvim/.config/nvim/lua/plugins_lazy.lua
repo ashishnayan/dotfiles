@@ -33,17 +33,17 @@ require('lazy').setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   -- vim code folding
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async',
-    config = function()
-      require 'ufo'.setup({
-        provider_selector = function(bufnr, filetype, buftype)
-          return { 'lsp', 'indent' }
-        end,
-      })
-    end
-  },
+  -- {
+  --   'kevinhwang91/nvim-ufo',
+  --   dependencies = 'kevinhwang91/promise-async',
+  --   config = function()
+  --     require 'ufo'.setup({
+  --       provider_selector = function(bufnr, filetype, buftype)
+  --         return { 'lsp', 'indent' }
+  --       end,
+  --     })
+  --   end
+  -- },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim',    opts = {} },
   { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
@@ -130,12 +130,14 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  },
+  -- { 'jose-elias-alvarez/null-ls.nvim' },
+  -- { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
+  -- {
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   config = function()
+  --     require("lsp_lines").setup()
+  --   end,
+  -- },
   {
     'L3MON4D3/LuaSnip',
     version = "v2.*",
@@ -383,4 +385,5 @@ require('lazy').setup({
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",
   "kristijanhusak/vim-dadbod-ui",
+  "github/copilot.vim",
 }, {})
