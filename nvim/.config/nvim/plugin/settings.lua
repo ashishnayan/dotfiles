@@ -126,4 +126,4 @@ vim.api.nvim_create_autocmd("BufWritePre",
     group = group
   })
 
-vim.g.pyindent_open_paren = ''
+vim.g.pyindent_open_parent = ''
