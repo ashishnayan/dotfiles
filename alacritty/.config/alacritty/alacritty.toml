@@ -10,7 +10,8 @@ blinking = "Off"
 shape = "Block"
 
 [env]
-TERM = "alacritty"
+# TERM = "alacritty"
+TERM =  "wezterm"
 
 [font]
 builtin_box_drawing = true

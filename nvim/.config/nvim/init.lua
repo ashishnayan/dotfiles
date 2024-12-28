@@ -1,6 +1,8 @@
 -- Sensible defaults
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.termguicolors = true
+vim.o.termguicolors = true
 
 -- Lazy Plugin Manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

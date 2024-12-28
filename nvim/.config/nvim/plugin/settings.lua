@@ -1,16 +1,15 @@
-local HOME = os.getenv("HOME")
-vim.g.mapleader = ' '
+local HOME           = os.getenv("HOME")
+vim.g.mapleader      = ' '
 vim.g.maplocalleader = ' '
 
 -- basic settings
-vim.o.inccommand = 'split'
-vim.o.encoding = "utf-8"
-vim.o.hidden = true
-vim.o.backspace = "indent,eol,start" -- backspace works on every char in insert mode
-vim.o.completeopt = 'menu,menuone,noselect'
-vim.o.history = 1000
-vim.o.startofline = true
-vim.cmd([[ set termguicolors ]])
+vim.o.inccommand     = 'split'
+vim.o.encoding       = "utf-8"
+vim.o.hidden         = true
+vim.o.backspace      = "indent,eol,start" -- backspace works on every char in insert mode
+vim.o.completeopt    = 'menu,menuone,noselect'
+vim.o.history        = 1000
+vim.o.startofline    = true
 
 -- Mapping waiting time
 vim.o.timeout        = false

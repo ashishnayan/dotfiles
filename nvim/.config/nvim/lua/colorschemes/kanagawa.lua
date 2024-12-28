@@ -5,8 +5,8 @@ require('kanagawa').setup({
     commentStyle = { italic = true },
     functionStyle = { italic = true },
     keywordStyle = { italic = true },
-    statementStyle = { bold = true },
-    typeStyle = { italic = true, bold = true },
+    statementStyle = { italic = true },
+    typeStyle = { italic = true },
     transparent = false,   -- do not set background color
     dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
     terminalColors = true, -- define vim.g.terminal_color_{0,17}

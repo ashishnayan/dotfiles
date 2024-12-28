@@ -80,6 +80,7 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Applications/WezTerm.app/Contents/MacOS/:$PATH"
+export PYENV_ROOT="/Users/ashishnayan/.pyenv"
 #
 export VISUAL=nvim;
 export EDITOR=nvim;
@@ -115,4 +116,5 @@ alias savii="cd ~/projects/savii/api/ && aa"
 alias ls="lsd --group-dirs first"
 alias l="ls -lart"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
+alias sshcdev="ssh dev@dev.legal-ai-hub.in"
 # zprof

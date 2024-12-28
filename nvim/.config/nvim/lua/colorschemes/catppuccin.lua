@@ -24,7 +24,7 @@ require("catppuccin").setup({
     strings = {},
     variables = {},
     numbers = {},
-    booleans = {},
+    booleans = { "italic" },
     properties = {},
     types = { "italic" },
     operators = {},
