@@ -17,9 +17,6 @@ return {
         tag = 'legacy',
       },
 
-      -- Autoformatting
-      "stevearc/conform.nvim",
-
       -- Additional lua configuration, makes nvim stuff amazing!
       -- 'folke/neodev.nvim',
     },
