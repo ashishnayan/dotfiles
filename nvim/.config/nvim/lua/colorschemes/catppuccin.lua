@@ -16,22 +16,22 @@ require("catppuccin").setup({
   no_bold = false,                -- Force no bold
   no_underline = false,           -- Force no underline
   styles = {                      -- Handles the styles of general hi groups (see `:h highlight-args`):
-    comments = { "italic" },      -- Change the style of comments
-    conditionals = { "italic" },
-    loops = { "italic" },
+    comments = { "italic", },     -- Change the style of comments
+    conditionals = { "italic", "bold" },
+    loops = { "italic", "bold" },
     functions = { "italic" },
-    keywords = { "italic" },
+    keywords = { "italic", "bold" },
     strings = {},
     variables = {},
     numbers = {},
-    booleans = { "italic" },
-    properties = {},
-    types = { "italic" },
-    operators = {},
+    booleans = { "italic", "bold" },
+    properties = { "italic" },
+    types = { "italic", "bold" },
+    operators = { "bold" },
   },
   -- color_overrides = {},
   color_overrides = {
-    mocha = {
+    macchiato = {
       -- custom everforest dark hard port
       rosewater = "#fed1cb",
       flamingo  = "#ff9185",

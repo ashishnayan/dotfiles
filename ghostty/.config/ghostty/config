@@ -1,0 +1,9 @@
+config-file = fonts.config
+theme = catppuccin-mocha
+mouse-hide-while-typing = true
+background-opacity = 0.75
+background-blur-radius = 20
+fullscreen = false
+# window-decoration = false
+window-padding-x = 1
+window-padding-y = 1
