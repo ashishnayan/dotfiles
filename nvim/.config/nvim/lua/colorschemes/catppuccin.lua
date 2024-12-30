@@ -55,7 +55,7 @@ require("catppuccin").setup({
       overlay0 = "#6d6649",
       surface2 = "#585c4a",
       surface1 = "#414b50",
-      surface0 = "#4c566a",
+      surface0 = "#3b4252",
       base = "#2e3440",
       mantle = "#161b1d",
       crust = "#14181a",
