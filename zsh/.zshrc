@@ -104,6 +104,7 @@ alias aa="source nvim-venv/bin/activate && source .env"
 # alias sshuat="ssh uat@uatserver.uplaon.ph -i ~/.ssh/id_rsa"
 alias sshuat="ssh uat@54.254.173.33 -i ~/.ssh/id_rsa"
 alias sshdev="ssh dev@devserver.uploan.ph -i ~/.ssh/id_rsa"
+alias sshprod="ssh prodro@54.151.183.173 -i ~/.ssh/id_rsa"
 
 # django alias
 alias drs="python manage.py runserver"
