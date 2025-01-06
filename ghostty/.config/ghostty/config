@@ -1,4 +1,5 @@
 config-file = fonts.config
+config-file = keybindings.config
 theme = catppuccin-mocha
 mouse-hide-while-typing = true
 background-opacity = 0.90
