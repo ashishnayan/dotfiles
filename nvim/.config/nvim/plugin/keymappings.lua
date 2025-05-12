@@ -18,8 +18,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
 
 -- These mappings control the size of splits (height/width)
-vim.keymap.set("n", "<M-,>", "<c-w>5<")
-vim.keymap.set("n", "<M-.>", "<c-w>5>")
+vim.keymap.set("n", "<C-,>", "<c-w>5<")
+vim.keymap.set("n", "<C-.>", "<c-w>5>")
 vim.keymap.set("n", "<M-t>", "<C-W>+")
 vim.keymap.set("n", "<M-s>", "<C-W>-")
 

@@ -24,7 +24,8 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit ice depth=1;
+zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -119,3 +120,11 @@ alias l="ls -lart"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
 alias sshcdev="ssh dev@dev.legal-ai-hub.in"
 # zprof
+
+# Restrict brew to autopdate
+export HOMEBREW_NO_AUTO_UPDATE="1"
+
+# Added by Amplify CLI binary installer
+export PATH="$HOME/.amplify/bin:$PATH"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
