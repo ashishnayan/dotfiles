@@ -119,6 +119,7 @@ alias ls="lsd --group-dirs first"
 alias l="ls -lart"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
 alias sshcdev="ssh dev@dev.legal-ai-hub.in"
+alias fkcrds="ssh -i /Users/ashishnayan/projects/fkc/fkc-instance.pem -f -N -L 5434:fkcdb.cj82qok82ptv.ap-south-1.rds.amazonaws.com:5432 ubuntu@15.206.205.42 -v"
 # zprof
 
 # Restrict brew to autopdate
@@ -128,3 +129,4 @@ export HOMEBREW_NO_AUTO_UPDATE="1"
 export PATH="$HOME/.amplify/bin:$PATH"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+. "/Users/ashishnayan/.deno/env"

@@ -38,7 +38,8 @@ vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>P", '"+P')
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [D]efinition" })
-
+vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+vim.keymap.set("n", "gb", vim.lsp.buf.format, { desc = "Format" })
 vim.keymap.set("n", "grR", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })
 vim.keymap.set("n", "<leader>fs", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
 vim.keymap.set(
