@@ -43,6 +43,8 @@ require("mason-lspconfig").setup({
 		"jsonls",
 		"html",
 		"cssls",
+		"ty",
+		"marksman",
 	},
 	automatic_enable = true,
 })
