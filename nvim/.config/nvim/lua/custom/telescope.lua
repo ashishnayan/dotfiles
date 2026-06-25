@@ -38,7 +38,7 @@ vim.keymap.set("n", "<space>fh", builtin.help_tags, { desc = "Find help tags" })
 vim.keymap.set("n", "<space>fg", builtin.live_grep, { desc = "Live grep" })
 vim.keymap.set("n", "<space>fb", builtin.buffers, { desc = "Find in Buffers" })
 vim.keymap.set("n", "<space>/", builtin.current_buffer_fuzzy_find, { desc = "Current buffer fuzzy find" })
-vim.keymap.set("n", "<space>fr", builtin.registers, { desc = "Registers" })
+vim.keymap.set("n", '<space>f"', builtin.registers, { desc = "Registers" })
 vim.keymap.set("n", "<space>fi", "<cmd>Telescope import<cr>", { desc = "Import" })
 
 vim.keymap.set("n", "<space>fw", builtin.grep_string, { desc = "Grep string" })

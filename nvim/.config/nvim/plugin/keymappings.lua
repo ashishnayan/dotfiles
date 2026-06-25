@@ -37,6 +37,7 @@ vim.keymap.set("v", "<leader>Y", '"+y$')
 vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>P", '"+P')
 
+vim.keymap.set("n", "gv", "<cmd>vs |lua vim.lsp.buf.definition()<CR>", { desc = "[G]oto [D]efinition" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [D]efinition" })
 vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
 vim.keymap.set("n", "gb", vim.lsp.buf.format, { desc = "Format" })
@@ -48,4 +49,6 @@ vim.keymap.set(
 	require("telescope.builtin").lsp_dynamic_workspace_symbols,
 	{ desc = "[W]orkspace [S]ymbols" }
 )
-vim.keymap.set("n", "<leader>kp", require("telescope_kube").show_pods, { desc = "Kubernetes Pods" })
+-- vim.keymap.set("n", "<leader>kp", require("telescope_kube").show_pods, { desc = "Kubernetes Pods" })
+vim.keymap.set("n", "<leader>M", "<C-w>|", { desc = "[M]aximize pane" })
+vim.keymap.set("n", "<leader>m", "<C-w>=", { desc = "Equalize pane" })
