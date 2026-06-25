@@ -4,9 +4,9 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "zbirenbaum/copilot.lua",
+      -- "zbirenbaum/copilot.lua",
       -- "zbirenbaum/copilot-cmp",
-      "giuxtaposition/blink-cmp-copilot",
+      -- "giuxtaposition/blink-cmp-copilot",
     },
 
     -- use a release tag to download pre-built binaries
@@ -39,7 +39,8 @@ return {
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot", "dadbod" },
+        -- default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot", "dadbod" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
         -- optionally disable cmdline completions
         -- cmdline = {},
         providers = {
@@ -50,22 +51,22 @@ return {
             score_offset = 100,
           },
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-          copilot = {
-            name = "Copilot",
-            module = "blink-cmp-copilot",
-            -- make copilot completions top priority (see `:h blink.cmp`)
-            score_offset = 101,
-            async = true,
-            transform_items = function(_, items)
-              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-              local kind_idx = #CompletionItemKind + 1
-              CompletionItemKind[kind_idx] = "Copilot"
-              for _, item in ipairs(items) do
-                item.kind = kind_idx
-              end
-              return items
-            end,
-          },
+          -- copilot = {
+          --   name = "Copilot",
+          --   module = "blink-cmp-copilot",
+          --   -- make copilot completions top priority (see `:h blink.cmp`)
+          --   score_offset = 101,
+          --   async = true,
+          --   transform_items = function(_, items)
+          --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          --     local kind_idx = #CompletionItemKind + 1
+          --     CompletionItemKind[kind_idx] = "Copilot"
+          --     for _, item in ipairs(items) do
+          --       item.kind = kind_idx
+          --     end
+          --     return items
+          --   end,
+          -- },
         },
       },
       appearance = {

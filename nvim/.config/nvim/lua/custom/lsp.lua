@@ -17,6 +17,7 @@
 -- })
 vim.lsp.config('ruff', {
 	cmd = { "ruff", "server" },
+	root_markers = { 'pyproject.toml', '.venv', 'ruff.toml', '.git' },
 	init_options = {
 		settings = {
 			-- Server settings should go here
@@ -33,6 +34,12 @@ vim.lsp.config('ruff', {
 		}
 	}
 })
+vim.lsp.config('ty', {
+	cmd = { "ty", "server" },
+	root_markers = { 'pyproject.toml', '.venv', 'ruff.toml', '.git' },
+})
+vim.lsp.enable('ruff')
+vim.lsp.enable('ty')
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
@@ -43,6 +50,8 @@ require("mason-lspconfig").setup({
 		"jsonls",
 		"html",
 		"cssls",
+		"ty",
+		"marksman",
 	},
 	automatic_enable = true,
 })

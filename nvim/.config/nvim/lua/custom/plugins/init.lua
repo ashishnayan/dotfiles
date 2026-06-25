@@ -9,18 +9,18 @@ return {
 		version = "*",
 	},
 	-- { "github/copilot.vim" },
-	{
-		"zbirenbaum/copilot.lua",
-
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-		end,
-	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	--
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = { enabled = false },
+	-- 			panel = { enabled = false },
+	-- 		})
+	-- 	end,
+	-- },
 	-- {"zbirenbaum/copilot-cmp"},
-	{ "giuxtaposition/blink-cmp-copilot" },
+	-- { "giuxtaposition/blink-cmp-copilot" },
 	-- { "rest-nvim/rest.nvim" },
 	{
 		"olrtg/nvim-emmet",

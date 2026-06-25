@@ -21,8 +21,9 @@ vim.o.showmatch = true -- show matching brackets
 vim.o.scrolloff = 3    -- always show 3 rows from edge of the screen
 vim.o.synmaxcol = 300  -- stop syntax highlight after x lines for performance
 vim.o.laststatus = 2   -- always show status line
+vim.o.splitright = true
 
-vim.o.list = true      -- do not display white characters
+vim.o.list = true -- do not display white characters
 -- vim.opt.listchars:append("space:⋅")
 vim.o.foldenable = true
 vim.o.foldlevel = 99 -- limit folding to 4 levels
@@ -90,11 +91,11 @@ vim.cmd([[
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
+  callback = function()
+    vim.hl.on_yank()
+  end,
+  group = highlight_group,
+  pattern = "*",
 })
 
 vim.g.python3_host_prog = HOME .. "/.pyenv/versions/py3.11nvim/bin/python3"
@@ -105,57 +106,57 @@ vim.cmd([[let g:vimwiki_list= [{'path': '$HOME/Documents/vimwiki/', 'syntax': 'm
 
 local group = vim.api.nvim_create_augroup("Formatter", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = {
-		"*.py",
-		"*.lua",
-		"*.sql",
-		"*.js",
-		"*.jsx",
-		"*.ts",
-		"*.tsx",
-		"*.css",
-		"*.go",
-		"*.yml",
-		"*.yaml",
-		"*.rs",
-		"*.json",
-		"*.toml",
-	},
-	command = "%s/\\s\\+$//e",
-	group = group,
+  pattern = {
+    "*.py",
+    "*.lua",
+    "*.sql",
+    "*.js",
+    "*.jsx",
+    "*.ts",
+    "*.tsx",
+    "*.css",
+    "*.go",
+    "*.yml",
+    "*.yaml",
+    "*.rs",
+    "*.json",
+    "*.toml",
+  },
+  command = "%s/\\s\\+$//e",
+  group = group,
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = {
-		"*.py",
-		"*.go",
-		"*.tsx",
-		"*.jsx",
-		"*.js",
-		"*.css",
-		"*.lua",
-		"*.rs",
-		"*.json",
-		"*.toml",
-		"*.yaml",
-		"*.yml",
-		"*.sql",
-		"*.html",
-		"*.xml",
-		"*.md",
-		"*.markdown",
-		"*.sh",
-		"*.bash",
-		"*.zsh",
-		"*.fish",
-		"*.c",
-		"*.cpp",
-		"*.h",
-		"*.hpp",
-		"*.java",
-	},
-	callback = function()
-		vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-	end,
-	group = group,
+  pattern = {
+    "*.py",
+    "*.go",
+    "*.tsx",
+    "*.jsx",
+    "*.js",
+    "*.css",
+    "*.lua",
+    "*.rs",
+    "*.json",
+    "*.toml",
+    "*.yaml",
+    "*.yml",
+    "*.sql",
+    "*.html",
+    "*.xml",
+    "*.md",
+    "*.markdown",
+    "*.sh",
+    "*.bash",
+    "*.zsh",
+    "*.fish",
+    "*.c",
+    "*.cpp",
+    "*.h",
+    "*.hpp",
+    "*.java",
+  },
+  callback = function()
+    vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+  end,
+  group = group,
 })
 -- vim.g.pyindent_open_parent = ""
