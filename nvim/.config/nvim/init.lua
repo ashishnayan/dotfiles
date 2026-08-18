@@ -7,6 +7,14 @@ vim.diagnostic.config({
 	virtual_lines = { current_line = true },
 })
 
+-- Force Neovim to treat .mkd and similar legacy variants as native markdown
+vim.filetype.add({
+	extension = {
+		mkd = "markdown",
+		md = "markdown",
+	}
+})
+
 -- Lazy Plugin Manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then

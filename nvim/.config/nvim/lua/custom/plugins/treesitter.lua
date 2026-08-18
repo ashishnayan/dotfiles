@@ -1,35 +1,37 @@
 return {
-	{ -- Highlight, edit, and navigate code
-		enabled = true,
+	{
 		"nvim-treesitter/nvim-treesitter",
-		-- dependencies = {
-		-- 	-- "nvim-treesitter/nvim-treesitter-textobjects",
-		-- },
+		branch = "main",
+		event = { "BufReadPost", "BufNewFile" },
 		build = ":TSUpdate",
-		lazy = true,
 		config = function()
-			-- require("custom.treesitter")
-			local configs = require("nvim-treesitter.configs")
+			require("nvim-treesitter.install").prefer_git = true
 
-			configs.setup({
-				ensure_installed = {
-					"c",
-					"python",
-					"tsx",
-					"lua",
-					"vim",
-					"vimdoc",
-					"query",
-					"elixir",
-					"heex",
-					"javascript",
-					"typescript",
-					"html",
-				},
-				sync_install = false,
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
+			-- Highlighting and query mapping are now integrated natively.
+			-- You only need to declare your preferred language parsers:
+			local builtin = {
+				"c",
+				"python",
+				"tsx",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"elixir",
+				"heex",
+				"javascript",
+				"typescript",
+				"html",
+				"markdown",
+				"markdown_inline",
+				"latex",
+				"yaml",
+			}
+
+			-- Installs missing parsers automatically on startup
+			for _, lang in ipairs(builtin) do
+				pcall(vim.cmd.TSInstall, lang)
+			end
 		end,
 	},
 }

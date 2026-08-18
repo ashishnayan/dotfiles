@@ -160,3 +160,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group,
 })
 -- vim.g.pyindent_open_parent = ""
+--
+--
+-- Force-override any legacy plugins trying to set the filetype to 'mkd'
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.md", "*.markdown", "*.mkd" },
+  callback = function()
+    -- Directly forces the window and buffer parameters to native markdown
+    vim.cmd("setlocal filetype=markdown")
+    vim.opt_local.conceallevel = 2
+  end,
+})

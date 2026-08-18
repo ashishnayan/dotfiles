@@ -21,7 +21,7 @@ vim.lsp.config('ruff', {
 	init_options = {
 		settings = {
 			-- Server settings should go here
-			lineLength = 131,
+			lineLength = 100,
 			organizeImports = true,
 			logLevel = "info",
 			logFile = "~/ruff.log",

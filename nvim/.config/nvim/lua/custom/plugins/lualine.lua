@@ -17,9 +17,27 @@ return {
           always_divide_middle = true,
         },
         sections = {
-          lualine_a = { "mode" },
-          lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic", "coc" } } },
-          lualine_c = { { "filename", file_status = true, path = 1 } },
+          lualine_a = { { "mode", fmt = function(str) return str:sub(1, 1) end } },
+          lualine_b = { {
+            "branch",
+            fmt = function(str)
+              if #str > 20 then
+                return str:sub(1, 20) .. '...'
+              end
+              return str
+            end
+          }, "diff", { "diagnostics", sources = { "nvim_diagnostic", "coc" } } },
+          lualine_c = { {
+            "filename",
+            file_status = true,
+            path = 4,
+            symbols = {
+              modified = ' ●', -- Text to show when the file is modified.
+              readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
+              unnamed = '[No Name]', -- Text to show for unnamed buffers.
+              newfile = '[New]', -- Text to show for newly created file before first write
+            }
+          } },
           lualine_x = { "filetype" },
           lualine_y = { "progress", "searchcount" },
           lualine_z = { "location" },
