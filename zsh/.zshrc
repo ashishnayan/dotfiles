@@ -34,6 +34,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 # zinit light jeffreytse/zsh-vi-mode
 
+# 1. Load the core git library first (resolves git_current_branch)
+zinit snippet OMZL::git.zsh
+
 # Add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
@@ -81,7 +84,7 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Applications/WezTerm.app/Contents/MacOS/:$PATH"
-export PYENV_ROOT="/Users/ashishnayan/.pyenv"
+# export PYENV_ROOT="/Users/ashishnayan/.pyenv"
 #
 export VISUAL=nvim;
 export EDITOR=nvim;
@@ -124,12 +127,12 @@ alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbi
 export HOMEBREW_NO_AUTO_UPDATE="1"
 
 # Added by Amplify CLI binary installer
-export PATH="$HOME/.amplify/bin:$PATH"
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-. "/Users/ashishnayan/.deno/env"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# export PATH="$HOME/.amplify/bin:$PATH"
+# eval "$(uv generate-shell-completion zsh)"
+# eval "$(uvx --generate-shell-completion zsh)"
+# . "/Users/ashishnayan/.deno/env"
+# export PATH="$HOME/.local/bin:$PATH"
+# export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
 for f in ~/dotfiles/zsh/functions/*.zsh; do
@@ -139,5 +142,6 @@ done
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

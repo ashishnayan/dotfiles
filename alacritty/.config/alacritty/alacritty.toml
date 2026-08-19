@@ -60,5 +60,5 @@ y = 1
 [general]
 live_config_reload = true
 # custom_cursor_colors = true
-# import = ["/Users/ashishnayan/.config/alacritty/colors/catppuccin-mocha.toml"]
-import = ["/Users/ashishnayan/.config/alacritty/colors/cobalt2.toml"]
+import = ["/Users/ashishnayan/.config/alacritty/colors/catppuccin-mocha.toml"]
+# import = ["/Users/ashishnayan/.config/alacritty/colors/cobalt2.toml"]
