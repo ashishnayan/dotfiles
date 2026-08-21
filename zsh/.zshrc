@@ -91,7 +91,8 @@ export EDITOR=nvim;
 # 
 # Ranger FilePreview Colorscheme
 export PYGMENTIZE_STYLE=gruvbox-dark
-export LS_COLORS="$(vivid generate molokai)"
+# export LS_COLORS="$(vivid generate molokai)"
+export LS_COLORS="$(vivid generate catppuccin-mocha)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export DISABLE_AUTO_TITLE='true'
 export PYTHON_VENV_NAME='.venv'
