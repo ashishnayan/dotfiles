@@ -132,7 +132,7 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 # eval "$(uv generate-shell-completion zsh)"
 # eval "$(uvx --generate-shell-completion zsh)"
 # . "/Users/ashishnayan/.deno/env"
-# export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH" # stowed `scripts` package lives here
 # export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
