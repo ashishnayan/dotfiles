@@ -1,0 +1,314 @@
+#!/usr/bin/env python3
+"""Convert a Postman collection (schema v2.0/v2.1) into kulala-style .http files.
+
+    postman2http collection.json -o ./api [--env dev]
+
+Emits one .http file per top-level folder (plus root.http for loose requests)
+and an http-client.env.json seeded from the collection's variables.
+
+Postman's {{var}} syntax is the same as kulala's, so variables pass through
+untouched. pm.* scripts cannot run in kulala and are emitted as comments.
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+
+SAFE = re.compile(r"[^A-Za-z0-9._-]+")
+# Postman path params (/users/:id) mean nothing to kulala -> /users/{{id}}
+PATH_PARAM = re.compile(r"(?<=/):([A-Za-z_][A-Za-z0-9_]*)")
+# Variables whose values belong in http-client.private.env.json, not in git
+SECRET_HINT = re.compile(
+    r"secret|token|password|passwd|pwd|apikey|api_key|credential|authorization|private",
+    re.I,
+)
+BRACKETED = re.compile(r"\[([^\]]+)\]")
+
+
+def slug(text, fallback="unnamed"):
+    out = SAFE.sub("-", (text or "").strip()).strip("-")
+    return out or fallback
+
+
+def as_list(value):
+    return value if isinstance(value, list) else []
+
+
+def raw_url(url):
+    """Postman stores url as a string or an object; keep the raw form."""
+    if isinstance(url, str):
+        return url
+    if isinstance(url, dict):
+        if url.get("raw"):
+            return url["raw"]
+        host = url.get("host")
+        host = ".".join(host) if isinstance(host, list) else (host or "")
+        path = url.get("path")
+        path = "/".join(path) if isinstance(path, list) else (path or "")
+        base = f"{url.get('protocol', 'https')}://{host}"
+        if path:
+            base += "/" + path.lstrip("/")
+        query = [
+            f"{q.get('key', '')}={q.get('value', '')}"
+            for q in as_list(url.get("query"))
+            if not q.get("disabled")
+        ]
+        return base + ("?" + "&".join(query) if query else "")
+    return ""
+
+
+def auth_header(auth):
+    """Map Postman auth blocks onto a plain Authorization header."""
+    if not isinstance(auth, dict):
+        return None
+    kind = auth.get("type")
+    params = {p.get("key"): p.get("value") for p in as_list(auth.get(kind))}
+    if kind == "bearer":
+        return ("Authorization", f"Bearer {params.get('token', '{{token}}')}")
+    if kind == "basic":
+        user = params.get("username", "{{username}}")
+        pwd = params.get("password", "{{password}}")
+        # kulala resolves this at request time; no need to pre-encode
+        return ("Authorization", f"Basic {user}:{pwd}")
+    if kind == "apikey":
+        if params.get("in") == "query":
+            return None  # already part of the URL in most collections
+        return (params.get("key", "X-API-Key"), params.get("value", "{{api_key}}"))
+    return None
+
+
+def body_lines(body, headers):
+    """Return (lines, extra_headers) for a Postman body block."""
+    if not isinstance(body, dict):
+        return [], []
+    mode = body.get("mode")
+    have = {k.lower() for k, _ in headers}
+
+    if mode == "raw":
+        text = body.get("raw") or ""
+        lang = (body.get("options", {}).get("raw", {}) or {}).get("language")
+        ctype = {"json": "application/json", "xml": "application/xml"}.get(lang, "text/plain")
+        extra = [] if "content-type" in have else [("Content-Type", ctype)]
+        return text.splitlines(), extra
+
+    if mode == "urlencoded":
+        pairs = [
+            f"{f.get('key', '')}={f.get('value', '')}"
+            for f in as_list(body.get("urlencoded"))
+            if not f.get("disabled")
+        ]
+        extra = [] if "content-type" in have else [("Content-Type", "application/x-www-form-urlencoded")]
+        return ["&".join(pairs)], extra
+
+    if mode == "formdata":
+        boundary = "----KulalaBoundary"
+        lines = []
+        for f in as_list(body.get("formdata")):
+            if f.get("disabled"):
+                continue
+            name = f.get("key", "")
+            lines.append(f"--{boundary}")
+            if f.get("type") == "file":
+                src = f.get("src") or ""
+                src = src[0] if isinstance(src, list) and src else src
+                filename = os.path.basename(src) if src else "file"
+                lines.append(f'Content-Disposition: form-data; name="{name}"; filename="{filename}"')
+                lines.append("")
+                lines.append(f"< {src or './' + filename}")
+            else:
+                lines.append(f'Content-Disposition: form-data; name="{name}"')
+                if f.get("contentType"):
+                    lines.append(f"Content-Type: {f['contentType']}")
+                lines.append("")
+                lines.append(f.get("value", ""))
+        lines.append(f"--{boundary}--")
+        extra = [] if "content-type" in have else [
+            ("Content-Type", f"multipart/form-data; boundary={boundary}")
+        ]
+        return lines, extra
+
+    if mode == "graphql":
+        gql = body.get("graphql") or {}
+        variables = gql.get("variables") or "{}"
+        if isinstance(variables, str):
+            try:
+                variables = json.loads(variables or "{}")
+            except json.JSONDecodeError:
+                variables = {}
+        payload = {"query": gql.get("query", ""), "variables": variables}
+        extra = [] if "content-type" in have else [("Content-Type", "application/json")]
+        return json.dumps(payload, indent=2).splitlines(), extra
+
+    if mode == "file":
+        src = (body.get("file") or {}).get("src")
+        return ([f"< {src}"] if src else []), []
+
+    return [], []
+
+
+def render_request(item, name):
+    req = item.get("request")
+    if isinstance(req, str):  # shorthand: bare URL string
+        req = {"method": "GET", "url": req}
+    if not isinstance(req, dict):
+        return []
+
+    method = (req.get("method") or "GET").upper()
+    url = PATH_PARAM.sub(r"{{\1}}", raw_url(req.get("url")))
+
+    headers = [
+        (h.get("key", ""), h.get("value", ""))
+        for h in as_list(req.get("header"))
+        if not h.get("disabled") and h.get("key")
+    ]
+    auth = auth_header(req.get("auth"))
+    if auth and auth[0].lower() not in {k.lower() for k, _ in headers}:
+        headers.append(auth)
+
+    body, extra_headers = body_lines(req.get("body"), headers)
+    headers.extend(extra_headers)
+
+    out = [f"### {name}", f"# @name {slug(name)}"]
+    if req.get("description"):
+        for line in str(req["description"]).splitlines():
+            out.append(f"# {line}")
+
+    # pm.* scripts don't run under kulala — preserved as comments, port by hand
+    for event in as_list(item.get("event")):
+        script = "\n".join(as_list((event.get("script") or {}).get("exec"))).strip()
+        if script:
+            out.append(f"# --- postman {event.get('listen', 'script')} (not executed) ---")
+            out.extend(f"#   {line}" for line in script.splitlines())
+
+    out.append(f"{method} {url}")
+    out.extend(f"{k}: {v}" for k, v in headers)
+    if body:
+        out.append("")
+        out.extend(body)
+    out.append("")
+    return out
+
+
+def write_json(path, data):
+    """Never clobber an existing env file — hand-edited secrets live in these."""
+    if os.path.exists(path):
+        path += ".new"
+        print(f"{os.path.basename(path[:-4])} exists -> writing {path}", file=sys.stderr)
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(data, fh, indent=2)
+        fh.write("\n")
+    print(f"{path}  ({len(data)} keys)")
+
+
+def env_name(name, path):
+    """'[PH][DEV] Enterprise' -> 'ph-dev'; otherwise slug the name."""
+    tokens = BRACKETED.findall(name or "")
+    if tokens:
+        return "-".join(slug(t).lower() for t in tokens)
+    base = name or os.path.basename(path).split(".")[0]
+    return slug(base).lower()
+
+
+def load_environment(path):
+    """Read a postman_environment.json -> (name, public vars, secret vars)."""
+    with open(path, encoding="utf-8") as fh:
+        data = json.load(fh)
+    public, private = {}, {}
+    for var in as_list(data.get("values")):
+        key = var.get("key")
+        if not key or var.get("enabled") is False:
+            continue
+        value = var.get("value", "")
+        if var.get("type") == "secret" or SECRET_HINT.search(key):
+            private[key] = value
+        else:
+            public[key] = value
+    return env_name(data.get("name"), path), public, private
+
+
+def walk(items, prefix=""):
+    """Flatten the item tree into (path, lines) pairs, one entry per request."""
+    for item in as_list(items):
+        name = item.get("name") or "unnamed"
+        if "item" in item:  # folder
+            yield from walk(item["item"], f"{prefix}{name} / ")
+        else:
+            yield prefix, render_request(item, f"{prefix}{name}".strip())
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Postman collection -> .http files")
+    ap.add_argument("collection")
+    ap.add_argument("-o", "--out", default=".", help="output directory")
+    ap.add_argument("--env", default="dev", help="env name for collection-only vars")
+    ap.add_argument(
+        "-e",
+        "--environment",
+        action="append",
+        default=[],
+        metavar="FILE",
+        help="postman_environment.json to import as an env block (repeatable)",
+    )
+    ap.add_argument("--single", action="store_true", help="one file instead of per-folder")
+    args = ap.parse_args()
+
+    with open(args.collection, encoding="utf-8") as fh:
+        col = json.load(fh)
+
+    title = (col.get("info") or {}).get("name") or "collection"
+    os.makedirs(args.out, exist_ok=True)
+
+    # Group requests by top-level folder
+    files = {}
+    for prefix, lines in walk(col.get("item")):
+        if not lines:
+            continue
+        top = prefix.split(" / ")[0].strip() if prefix else ""
+        key = slug(title) if args.single else (slug(top) if top else "root")
+        files.setdefault(key, []).extend(lines)
+
+    for key, lines in files.items():
+        path = os.path.join(args.out, f"{key}.http")
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines).rstrip() + "\n")
+        count = sum(1 for line in lines if line.startswith("### "))
+        print(f"{path}  ({count} requests)")
+
+    # Collection variables apply to every environment -> $shared
+    shared = {
+        v["key"]: v.get("value", "")
+        for v in as_list(col.get("variable"))
+        if v.get("key") and not v.get("disabled")
+    }
+
+    public_envs, private_envs = {}, {}
+    for env_file in args.environment:
+        name, public, private = load_environment(env_file)
+        public_envs[name] = public
+        if private:
+            private_envs[name] = private
+        print(f"env '{name}': {len(public)} vars, {len(private)} secret(s)")
+
+    # No environment files given: park the collection vars under --env
+    if not public_envs and shared:
+        public_envs[args.env] = {}
+
+    write_json(
+        os.path.join(args.out, "http-client.env.json"),
+        {"$schema": "https://getkulala.net/http-client.env.schema.json"}
+        | ({"$shared": shared} if shared else {})
+        | public_envs,
+    )
+    if private_envs:
+        write_json(os.path.join(args.out, "http-client.private.env.json"), private_envs)
+        gitignore = os.path.join(args.out, ".gitignore")
+        if not os.path.exists(gitignore):
+            with open(gitignore, "w", encoding="utf-8") as fh:
+                fh.write("http-client.private.env.json\n")
+            print(f"{gitignore}  (ignoring the private env file)")
+
+
+if __name__ == "__main__":
+    main()

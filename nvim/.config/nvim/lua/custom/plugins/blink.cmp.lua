@@ -43,6 +43,13 @@ return {
         default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
         -- optionally disable cmdline completions
         -- cmdline = {},
+
+        -- kulala.nvim ships its own in-process LSP (methods, headers, {{vars}},
+        -- $kulala.* helpers), so the `lsp` source covers it. Drop dadbod/lazydev
+        -- noise in .http buffers.
+        per_filetype = {
+          http = { "lsp", "path", "snippets", "buffer" },
+        },
         providers = {
           lazydev = {
             name = "LazyDev",
