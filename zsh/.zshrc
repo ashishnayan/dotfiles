@@ -123,8 +123,9 @@ alias l="ls -lart"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
 # zprof
 
-# Restrict brew to autopdate
-export HOMEBREW_NO_AUTO_UPDATE="1"
+# Throttle brew autoupdate instead of disabling it, so metadata never goes
+# stale enough to hide an available upgrade (e.g. claude-code)
+export HOMEBREW_AUTO_UPDATE_SECS="86400"
 
 # Added by Amplify CLI binary installer
 # export PATH="$HOME/.amplify/bin:$PATH"
