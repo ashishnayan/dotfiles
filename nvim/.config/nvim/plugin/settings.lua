@@ -98,8 +98,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
-vim.g.python3_host_prog = HOME .. "/.pyenv/versions/py3.11nvim/bin/python3"
-vim.g.python_host_prog = HOME .. "/.pyenv/versions/py2nvim/bin/python2"
+vim.g.python3_host_prog = HOME .. "/.venv/nvim/bin/python3"
 
 -- VimWiki
 vim.cmd([[let g:vimwiki_list= [{'path': '$HOME/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}] ]])
