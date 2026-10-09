@@ -212,7 +212,7 @@ signal_symbol = " "
 style = "bold red"
 map_symbol = true
 pipestatus = true
-pipestatus_format = "\\[$pipestatus\\] => [$symbol$common_meaning$signal_name$maybe_int]($style)"
+pipestatus_format = "\\[$pipestatus\\] => [$symbol$common_meaning$signal_name$maybe_int]($style) "
 
 [jobs]
 symbol = " "
