@@ -5,6 +5,31 @@
 -- The helper below wires the two together by passing claudecode's WebSocket port
 -- into the Claude CLI's environment so it auto-connects to this Neovim instance.
 
+---Reconnect a persisted (tmux) Claude session to this Neovim's IDE server.
+---After an nvim restart the old IDE port is gone; Claude does not rediscover it on
+---its own, so drive its `/ide` picker: open it, move to "Neovim", confirm.
+---@param session table sidekick.cli.Session (tmux backend)
+local function reconnect_ide(session)
+  if not (session and session.backend == "tmux" and session.pane_id) then
+    return
+  end
+  local pane = session:pane_id()
+  if not pane then
+    return
+  end
+  local function keys(...)
+    vim.system({ "tmux", "send-keys", "-t", pane, ... })
+  end
+  -- After confirming, Claude asks whether to always auto-connect (default "No"):
+  -- a final Enter accepts that default and leaves your global settings untouched.
+  local steps = { { 0, "/ide" }, { 800, "Enter" }, { 2000, "Up" }, { 300, "Enter" }, { 1500, "Enter" } }
+  local delay = 0
+  for _, step in ipairs(steps) do
+    delay = delay + step[1]
+    vim.defer_fn(function() keys(step[2]) end, delay)
+  end
+end
+
 ---Open/toggle a Claude Code session attached to this Neovim's IDE server.
 ---@param opts? { args?: string[], focus?: boolean, action?: "toggle"|"show" }
 local function claude(opts)
@@ -28,6 +53,11 @@ local function claude(opts)
   -- (other tmux windows/projects) are ignored here. Use <leader>at to attach to those.
   local State = require("sidekick.cli.state")
   local own = State.get({ name = "claude", external = false })
+  -- A session left over from a previous nvim (tmux mux): reattach, then re-link the IDE.
+  local persisted = own[1] and own[1].started and not own[1].attached and own[1].session or nil
+  if persisted then
+    vim.defer_fn(function() reconnect_ide(persisted) end, 1500)
+  end
   if #own == 0 then
     State.attach({ tool = require("sidekick.config").get_tool("claude"), installed = true }, {
       show = true,
@@ -51,8 +81,10 @@ return {
       nes = { enabled = false },
       cli = {
         win = { layout = "right", split = { width = 80 } },
-        -- Set `mux.enabled = true` to keep sessions alive in tmux across nvim restarts.
-        mux = { backend = "tmux", enabled = false },
+        -- Sessions live in a detached tmux session (one per tool + cwd) and survive
+        -- nvim restarts. On reattach the helper above re-links the IDE socket
+        -- automatically (see reconnect_ide); `/ide` works manually as a fallback.
+        mux = { backend = "tmux", enabled = true, create = "terminal" },
       },
     },
     config = function(_, opts)

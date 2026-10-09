@@ -24,6 +24,10 @@
 --
 --   Inside the Claude terminal: <C-.> or <leader>af jumps back to the editor,
 --   `q` (normal mode) hides the terminal window.
+--
+--   Persistence: Claude runs in a detached tmux session per project, so it
+--   survives :q. <leader>ac in a new nvim reattaches and re-links the IDE
+--   socket. To really stop it: /exit in Claude, or `tmux kill-session -t "claude <id>"`.
 -- ============================================================================
 
 -- coder/claudecode.nvim: implements the same WebSocket/MCP IDE protocol as the
