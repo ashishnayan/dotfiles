@@ -173,6 +173,45 @@ detect_files = ["Chart.yaml", "kustomization.yaml", "skaffold.yaml"]
 detect_folders = ["k8s", "kubernetes", "helm", "charts"]
 detect_env_vars = ["KUBECONFIG"]
 
+# Context aliases: first matching pattern wins. EKS ARNs collapse to the cluster
+# name; environment suffix picks the colour so prod is unmissable.
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:[a-z0-9-]+:[0-9]+:cluster/(?P<cluster>.*-prd[a-z0-9-]*)"
+context_alias = "$cluster"
+style = "bold red"
+symbol = "\uf071 "
+
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:[a-z0-9-]+:[0-9]+:cluster/(?P<cluster>.*-stg[a-z0-9-]*)"
+context_alias = "$cluster"
+style = "bold peach"
+
+[[kubernetes.contexts]]
+context_pattern = "arn:aws:eks:[a-z0-9-]+:[0-9]+:cluster/(?P<cluster>.*)"
+context_alias = "$cluster"
+style = "sky"
+
+# Bare names (e.g. after `aws eks update-kubeconfig --alias gt-prd`)
+[[kubernetes.contexts]]
+context_pattern = ".*-?prd.*"
+style = "bold red"
+symbol = "\uf071 "
+
+[[kubernetes.contexts]]
+context_pattern = ".*-?stg.*"
+style = "bold peach"
+
+[[kubernetes.contexts]]
+context_pattern = "docker-desktop"
+context_alias = "docker"
+symbol = "\uf308 "
+style = "sapphire"
+
+[[kubernetes.contexts]]
+context_pattern = "(minikube|kind-.*|k3d-.*|orbstack)"
+context_alias = "local"
+style = "green"
+
 [aws]
 # Icon lives inside the profile group so nothing shows when only a default
 # region is configured in ~/.aws/config.
