@@ -24,13 +24,12 @@ $status\
 $character"""
 
 right_format = """
+$cmd_duration\
 $python\
 $nodejs\
 $java\
 $rust\
 $docker_context\
-$line_break\
-$cmd_duration\
 """
 
 [palettes.catppuccin_mocha]
@@ -100,15 +99,15 @@ truncation_symbol = "…"
 format = "([\\[$all_status$ahead_behind\\]]($style) )"
 style = "peach"
 conflicted = ""
-ahead = "${count}"
-behind = "${count}"
-diverged = "${ahead_count}${behind_count}"
-untracked = "${count}"
-stashed = "${count}"
-modified = "${count}"
-staged = "${count}"
-renamed = "${count}"
-deleted = "${count}"
+ahead = " ${count}"
+behind = " ${count}"
+diverged = " ${ahead_count}${behind_count}"
+untracked = " ${count}"
+stashed = " ${count}"
+modified = " ${count}"
+staged = " ${count}"
+renamed = " ${count}"
+deleted = " ${count}"
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\)]($style) "
