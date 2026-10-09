@@ -174,8 +174,9 @@ detect_folders = ["k8s", "kubernetes", "helm", "charts"]
 detect_env_vars = ["KUBECONFIG"]
 
 [aws]
-symbol = " "
-format = "[$symbol($profile )(\\[$duration\\] )]($style)"
+# Icon lives inside the profile group so nothing shows when only a default
+# region is configured in ~/.aws/config.
+format = "([ $profile(\\[$duration\\])]($style) )"
 style = "peach"
 force_display = false
 expiration_symbol = "󰅐"
