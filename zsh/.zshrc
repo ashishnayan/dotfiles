@@ -1,15 +1,10 @@
-# zmodload zsh/zprof
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# Prompt
+eval "$(starship init zsh)"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -22,10 +17,6 @@ fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
-
-# Add in Powerlevel10k
-zinit ice depth=1;
-zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -46,11 +37,9 @@ zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::python
 
-# Load completions
+# Load completions (Docker CLI completions live in ~/.docker/completions)
+fpath=(~/.docker/completions $fpath)
 autoload -Uz compinit && compinit
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
 bindkey -v
@@ -84,6 +73,9 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Applications/WezTerm.app/Contents/MacOS/:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export EZA_CONFIG_DIR="$HOME/.config/eza"
 # export PYENV_ROOT="/Users/ashishnayan/.pyenv"
 #
 export VISUAL=nvim;
@@ -119,9 +111,23 @@ alias ds="python manage.py shell"
 # alias nac="source nvim-venv/bin/activate && source .env"
 alias n="nvim"
 alias savii="cd ~/projects/savii/api/ && aa"
-alias ls="lsd --group-dirs first"
-alias l="ls -lart"
+# alias ls="lsd --group-dirs first"
+# alias l="ls -lart"
 alias rmq="docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.8.9-management"
+# Standard grid replacement for ls with icons and folders sorted first
+alias ls='eza --icons --group-directories-first'
+
+# The "everything" view: detailed info, human-readable sizes, Git status, and headers
+alias ll='eza -lh --icons --git --group-directories-first --header'
+
+# Comprehensive view showing all hidden files
+alias la='eza -lah --icons --git --group-directories-first'
+
+# Two-level deep tree view using native elements
+alias lt='eza --tree --level=2 --icons'
+
+alias l=la
+
 # zprof
 
 # Throttle brew autoupdate instead of disabling it, so metadata never goes
@@ -147,3 +153,7 @@ export NVM_DIR="$HOME/.nvm"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# JAVA HOME
+alias use_java21="export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+alias use_java26="export JAVA_HOME=/opt/homebrew/opt/openjdk@26/libexec/openjdk.jdk/Contents/Home"

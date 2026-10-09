@@ -9,13 +9,18 @@ command_timeout = 1000
 palette = "catppuccin_mocha"
 
 format = """
+$os\
 $directory\
 $git_branch\
 $git_status\
 $git_state\
+$git_metrics\
+$aws\
 $kubernetes\
 $line_break\
+$sudo\
 $jobs\
+$status\
 $character"""
 
 right_format = """
@@ -112,6 +117,12 @@ rebase = " rebasing"
 merge = " merging"
 cherry_pick = "cherry-picking"
 
+[git_metrics]
+disabled = false
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+added_style = "green"
+deleted_style = "red"
+
 # ── Languages / runtimes (only shown when the project uses them) ─────────────
 
 [python]
@@ -164,7 +175,7 @@ detect_env_vars = ["KUBECONFIG"]
 
 [aws]
 symbol = " "
-format = "[$symbol($profile )(\\($region\\) )(\\[$duration\\] )]($style)"
+format = "[$symbol($profile )(\\[$duration\\] )]($style)"
 style = "peach"
 force_display = false
 expiration_symbol = "󰅐"
@@ -183,6 +194,25 @@ min_time = 2_000
 format = "[󰔛 $duration]($style) "
 style = "yellow"
 show_notifications = false
+
+[sudo]
+disabled = false
+symbol = " "
+format = "[$symbol]($style)"
+style = "bold red"
+
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = " "
+not_executable_symbol = " "
+not_found_symbol = " "
+sigint_symbol = " "
+signal_symbol = " "
+style = "bold red"
+map_symbol = true
+pipestatus = true
+pipestatus_format = "\\[$pipestatus\\] => [$symbol$common_meaning$signal_name$maybe_int]($style)"
 
 [jobs]
 symbol = " "
